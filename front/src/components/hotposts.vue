@@ -12,15 +12,15 @@
                 </div>
                 <div class="bot">
                     <div calss="view">
-                        <i></i>
+                        <i class="iconfont">&#xe63f;</i>
                         392
                     </div>
                     <div calss="zan">
-                        <i></i>
+                        <i class="iconfont">&#xe645;</i>
                         12
                     </div>
                     <div calss="apply">
-                        <i></i>
+                        <i class="iconfont">&#xe64f;</i>
                         4
                     </div>
                 </div>                

@@ -1,7 +1,7 @@
 <template>
     <div class="shopcar">
         <div class="header">
-                <i class="iconfont">&#xe647;</i>
+                <left></left>
                 <h2>购物车<span(5)</span></h2>
         </div>
        <table width="100%" align="center" cellpadding="0" border-bottom=".1rem solid #ccc" style="border-collapse:collapse; border-spacing:0px 10px;">
@@ -71,12 +71,19 @@
 </template>
 
 <script>
+ import left from "./left.vue";
     export default {
         name:'shopcar',
         data(){
             return{
                 ischeck:true
             }
+        },
+        methods:{
+
+        },
+        components:{
+        left
         }
     }
 </script>
@@ -169,7 +176,7 @@
     }
     .bot{
      position:fixed;
-     bottom:4rem;
+     bottom:0rem;
      height:4rem;
      line-height:4rem;
     }

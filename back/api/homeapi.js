@@ -21,7 +21,7 @@ router.get("/category1",function(req,res,next){
 //分类2
 router.get("/category2",function(req,res,next){
     //回调函数
-    spider("/api?c=index&a=category&pid=11",function (result) {
+    spider("/api?c=index&a=category&pid="+req.query.cateid,function (result) {
         res.send(result); // 如果渲染模板 res.render("")
     });
 });
@@ -58,6 +58,12 @@ router.get("/detail",function(req,res,next){
 router.get("/posts",function(req,res,next){
     //回调函数
     spider("/api?c=weibo&a=index&order=new&page=1",function (result) {
+        res.send(result); // 如果渲染模板 res.render("")
+    });
+});
+router.get("/postdetail",function(req,res,next){
+    //回调函数
+    spider(`http://dc.srh9.com/api?c=weibo&a=detail&page=${req.query.pagenum}&id=${req.query.postid}`,function (result) {
         res.send(result); // 如果渲染模板 res.render("")
     });
 });

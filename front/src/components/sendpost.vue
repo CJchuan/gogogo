@@ -1,7 +1,7 @@
 <template>
     <div class="sendpost">
       <div class="header2">
-            <i class="iconfont" @click="gob">&#xe647;</i>
+            <left></left>
             <h2>发表帖子</h2>
       </div>
       <Writecont></Writecont>
@@ -19,16 +19,14 @@ import Writecont from "./Writecont.vue";
             }
         },
         components:{
-                Writecont
+                Writecont,
+                left
         },
         methods:{
           sendpost(){
             this.$http.get("http://10.2.158.246:3000/posts/write",{userId:1,username:"yzx",word:"今天天气好！",}).then(res=>{
 
             })
-          },
-          gob(){
-             this.goback();
           }
         }
     }

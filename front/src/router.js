@@ -25,6 +25,7 @@ const Homeposts=resolve=>require(["./components/homeposts.vue"],resolve);
 const Sendpost=resolve=>require(["./components/sendpost.vue"],resolve);
     //帖子列表
 const Postslist=resolve=>require(["./components/postslist.vue"],resolve);
+const Postdetail=resolve=>require(["./components/postdetail.vue"],resolve);
     //我的消息
 const Mynews=resolve=>require(["./components/mynews.vue"],resolve);
 const Apply=resolve=>require(["./components/apply.vue"],resolve);
@@ -67,6 +68,11 @@ const routes=[
         path:"postslist",
         component:Postslist,
         name:"postslist"       
+    },
+    {
+        path:"postdetail/:poid",
+        component:Postdetail,
+        name:"postdetail"  
     },
     {
         path:"sendpost",

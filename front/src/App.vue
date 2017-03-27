@@ -3,14 +3,6 @@
     <keep-alive>
         <router-view></router-view>
     </keep-alive>
-    <ul class="footer">
-        <router-link to="/home" tag="li" active-class="Acitive">鼎城商城</router-link>
-        <router-link to="/classify" tag="li" active-class="Acitive">分类</router-link>
-        <router-link to="/shopcar" tag="li" active-class="Acitive">购物车</router-link>
-         <router-link to="/community" tag="li" active-class="Acitive">社区</router-link>
-        <router-link to="/mine" tag="li" active-class="Acitive">我的</router-link>
-
-    </ul>
   </div>
 </template>
 
@@ -43,7 +35,7 @@ ul,li{
   bottom:0;
   width:100%;
   height:4rem;
-  line-height:4rem;
+  line-height:2rem;
   display:flex;
   z-index:10;
   background-color:#fff;
@@ -51,6 +43,9 @@ ul,li{
 .footer li{
   text-align:center;
   flex:1
+}
+.footer li i{
+   display:block
 }
 .l{
   float:left
@@ -65,5 +60,20 @@ ul,li{
            color:#0089dc;
          
         }
+@font-face {
+  font-family: 'iconfont';
+  src: url('./assets/font/iconfont.eot');
+  src: url('./assets/font/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('./assets/font/iconfont.woff') format('woff'),
+  url('./assets/font/iconfont.ttf') format('truetype'),
+  url('./assets/font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 </style>

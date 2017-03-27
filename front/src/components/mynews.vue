@@ -1,7 +1,7 @@
 <template>
     <div class="mynews">
         <div class="header2">
-           <i class="iconfont">&#xe647;</i>
+           <left></left>
             <h2>回复我的</h2>
         </div>
         <ul>
@@ -28,12 +28,16 @@
 </template>
 
 <script>
+ import left from "./left.vue";
     export default {
         name:'mynews',
         data(){
             return{
 
             }
+        },
+        components:{
+          left
         }
     }
 </script>

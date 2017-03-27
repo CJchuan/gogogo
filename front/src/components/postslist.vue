@@ -1,7 +1,7 @@
 <template>
     <div class="postslist">
         <div class="header2">
-           <i class="iconfont">&#xe647;</i>
+           <left></left>
             <h2>帖子列表</h2>
         </div>
         <poststemp></poststemp>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import left from "./left.vue";
 import poststemp from "./poststemp.vue";
     export default {
         name:'postslist',
@@ -18,7 +19,8 @@ import poststemp from "./poststemp.vue";
             }
         },
         components:{
-            poststemp
+            poststemp,
+            left
         }
         
     }

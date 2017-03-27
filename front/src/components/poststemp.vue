@@ -1,7 +1,7 @@
 <template>
     <div class="poststemp cont">
         <ul>
-            <li v-for="(data,index) of postslist">
+            <li v-for="(data,index) of postslist" @click="changeposdetail(data.id)" :key="data.id">
                 <div class="top">
                     <img src="" alt=""/>
                     <h2>{{data.nickname}}</h2>
@@ -12,15 +12,15 @@
                 </div>
                 <div class="bot">
                     <div calss="view">
-                        <i class="iconfont">&#xe65e;</i>
+                        <i class="iconfont">&#xe63f;</i>
                         {{data.view}}
                     </div>
                     <div calss="zan"  data-index="index">
-                        <i class="iconfont">&#xe636;</i>
+                        <i class="iconfont">&#xe645;</i>
                         {{data.digg}}
                     </div>
-                    <div calss="apply" @click="changeapplay">
-                        <i class="iconfont">&#xe624;</i>
+                    <div calss="apply">
+                        <i class="iconfont">&#xe64f;</i>
                         {{data.comment}}
                     </div>
                 </div>                
@@ -59,8 +59,8 @@ import router from "../router" ;
                     }
             }
             */
-            changeapplay(){
-              router.push({name:'apply'})
+            changeposdetail(id){
+               router.push({name:'postdetail',params:{poid:id}})
             }
         }
     }
