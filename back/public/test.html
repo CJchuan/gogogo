@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试数据用</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <script type="text/javascript">
+        //fetch get请求示例
+
+    fetch("/homeapi/home").then(function(res) {
+  // res instanceof Response == true.
+  if (res.ok) {
+    res.json().then(function(data) {
+      console.log(data.entries);
+    });
+  } else {
+    console.log("Looks like the response wasn't perfect, got status", res.status);
+  }
+}, function(e) {
+  console.log("Fetch failed!", e);
+});
+
+
+//fetch post请求示例
+/*
+fetch("/homeapi/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: "firstName=Nikhil&favColor=blue&password=easytoguess"
+}).then(function(res) {
+  if (res.ok) {
+    alert("Perfect! Your settings are saved.");
+  } else if (res.status == 401) {
+    alert("Oops! You are not authorized.");
+  }
+}, function(e) {
+  alert("Error submitting form!");
+});
+*/
+    </script>
+</body>
+</html>
