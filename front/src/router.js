@@ -32,21 +32,25 @@ const Apply=resolve=>require(["./components/apply.vue"],resolve);
 
 
 
-/*
+
 //我的内部模块
-    //登录
-const Login=resolve=>require(["./components/login.vue"],resolve);
-//注册
-const Register=resolve=>require(["./components/register.vue"],resolve);
-    //订单记录
-const Order=resolve=>require(["./components/order.vue"],resolve);
-    //我的收藏
-const Collection=resolve=>require(["./components/collection.vue"],resolve);
-    //收货地址
-const Address=resolve=>require(["./components/address.vue"],resolve);
-    //我的二维码
-const Qrcode=resolve=>require(["./components/qrcode.vue"],resolve);
-*/
+    const Mypro = resolve => require(["./components/mypro.vue"], resolve)
+//登录
+    const Loading = resolve => require(["./components/loading.vue"], resolve)
+// const Login=resolve=>require(["./components/login.vue"],resolve);
+// //注册
+    const Zhuce = resolve => require(["./components/zhuce.vue"], resolve)
+// const Register=resolve=>require(["./components/register.vue"],resolve);
+//     //订单记录
+// const Order=resolve=>require(["./components/order.vue"],resolve);
+//     //我的收藏
+// const Collection=resolve=>require(["./components/collection.vue"],resolve);
+//     //收货地址
+    const Myaddress = resolve => require(["./components/myaddress.vue"], resolve)
+// const Address=resolve=>require(["./components/address.vue"],resolve);
+//     //我的二维码
+// const Qrcode=resolve=>require(["./components/qrcode.vue"],resolve);
+
 const routes=[
 {
     path:"/home",
@@ -91,7 +95,36 @@ const routes=[
     }
     ]
 },
-{path:"/mine",component:Mine},
+{
+    path:"/mine",
+    component:Mine,
+
+    redirect:"/mine/mypro",
+    children:[
+        {
+          name:"mypro",
+          path:"mypro",
+          component:Mypro
+        },
+        {
+          name: "loading",
+         path:"loading", 
+         component:Loading,
+        },
+        {
+          name:"zhuce",
+          path:"zhuce",
+          component:Zhuce
+        },
+        {
+          name: "myaddress",
+         path:"myaddress", 
+         component:Myaddress
+        }
+      ]
+
+
+},
 {path:"*",redirect:'/home'}
 
 

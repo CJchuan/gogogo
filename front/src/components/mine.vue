@@ -1,9 +1,11 @@
 <template>
     <div class="mine">
-    mine
-        <keep-alive>
-            <router-view></router-view>
-        </keep-alive>
+    
+        
+            <router-view>
+            11111    
+            </router-view>
+        
          <ul class="footer">
         <router-link to="/home" tag="li" active-class="Acitive">
         <i class="iconfont">&#xe608;</i>
