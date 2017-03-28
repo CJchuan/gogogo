@@ -7,25 +7,109 @@
                 <div class="aui-title"><a href="index.html"> 鼎城商城注册</a></div>
             </header>
             <div style="padding:20px;">
-                <form class="form" method="post">
+                <div class="form">
                     <input v-model="username" id="name" type="text" class="username" name="name" value="" placeholder="请输用户名">
                     <input v-model="password" id="password" type="password" class="password" name="password" value="" placeholder="6-12位字符组合密码">
                     <div class="popb" style="display:none">密码与要求不符</div>
                     <div class="succ" style="display:none"></div>
 
 
-                    <button class="aui-btn aui-btn-primary aui-btn-block" type="submit" id="submit" @clicl="reg">免费注册</button>
+                    <button class="aui-btn aui-btn-primary aui-btn-block"  id="submit" @click="reg">免费注册</button>
 
                     <div style="line-height: 50px;">
                         <a class="aui-pull-left"  url="loginForget.html"  @click="changepage">已有账号?</a>
                         <a class="aui-pull-right"> <input type="checkbox" name="moren" checked class="xieyi"> 用户协议</input> </a>
                     </div>                    
-                </form>   
+                </div>   
             </div>
         </div>
  </template>
 
-    <style>
+   
+    <script>
+
+    import router from "../router";
+
+    export default {
+      name: 'zhuce',
+      data () {
+        return {
+           // categorylist:[],
+           // goodslist:[],
+           // currentIndex:0,
+           // isShow:true
+           postslist:[],
+           password:'',
+           username:''
+
+
+        }
+      },
+
+
+      methods:{
+
+        changepage(){
+        //router.push(`/goods/detail/${id}`); //es6 字符串模板
+            router.push({name:"loading"})
+
+        },
+
+        reg(){
+           var _this=this;
+           fetch("http://10.2.158.246:3000/register/goReg",{
+                method:'post',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `username=${_this.username}&password=${_this.password}`
+                }).then(function (response) {
+                return response.json();//json对象
+                }).then(function(result){
+                console.log(result);
+                if(result==1){
+                    router.push({name:"loading"});
+                }else{
+                  alert('注册失败！')
+                }
+            })
+
+        }
+
+    }
+}
+
+
+
+// var password=document.getElementById("password");//密码
+// var submit=document.getElementById("submit");//点击注册
+// var succ1=document.getElementsByClassName("succ");//对号
+// var popb1=document.getElementsByClassName("popb");//错误的提示
+
+// var re2=/[a-zA-Z]{6,16}/;
+// password.onblur=function(){
+//     if (!re2.test(password.value)) {
+//         popb1.style.display="block";
+//         password.style.border="1px solid red";
+        
+//     }else{
+//         succ1.style.display="block";
+//     }
+// }
+// password.onfocus=function(){
+//     password.style.border="1px solid #3879d9";
+//     popb1.style.display="none";
+//     password.value="";
+
+// }
+
+
+
+
+
+    </script>
+
+ <style>
 
     /*@font-face {
         font-family: 'iconfont';
@@ -212,81 +296,3 @@
 
 
     </style>
-
-    <script>
-
-    import router from "../router";
-
-    export default {
-      name: 'zhuce',
-      data () {
-        return {
-           // categorylist:[],
-           // goodslist:[],
-           // currentIndex:0,
-           // isShow:true
-           postslist:[],
-           password:'',
-           username:''
-
-
-        }
-      },
-
-
-      methods:{
-
-        changepage(){
-        //router.push(`/goods/detail/${id}`); //es6 字符串模板
-            router.push({name:"loading"})
-
-        },
-
-        reg (){
-           fetch("http://10.2.158.246:3000/register/goReg",{
-                method:'post',
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: "username=xiaoming&password=aaaaaaaa"
-                }).then(function (response) {
-                return response.json();//json对象
-                }).then(function(result){
-                console.log(result);
-            })
-
-        }
-
-    }
-}
-
-
-
-// var password=document.getElementById("password");//密码
-// var submit=document.getElementById("submit");//点击注册
-// var succ1=document.getElementsByClassName("succ");//对号
-// var popb1=document.getElementsByClassName("popb");//错误的提示
-
-// var re2=/[a-zA-Z]{6,16}/;
-// password.onblur=function(){
-//     if (!re2.test(password.value)) {
-//         popb1.style.display="block";
-//         password.style.border="1px solid red";
-        
-//     }else{
-//         succ1.style.display="block";
-//     }
-// }
-// password.onfocus=function(){
-//     password.style.border="1px solid #3879d9";
-//     popb1.style.display="none";
-//     password.value="";
-
-// }
-
-
-
-
-
-    </script>
-

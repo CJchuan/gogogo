@@ -54,7 +54,8 @@ const Apply=resolve=>require(["./components/apply.vue"],resolve);
 const routes=[
 {
     path:"/home",
-    component:Home
+    component:Home,
+    name:"home"
 },
 {path:"/classify",component:Classify},
 {path:"/shopcar",component:Shopcar},

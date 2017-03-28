@@ -9,15 +9,15 @@
 		        <div class="aui-title"><a href="index.html"> 鼎城商城</a></div>
 		    </header>
 		    <div style="padding:20px;">
-		    	<form class="form" method="post">
-		    		<input id="name" type="text" class="username" name="name" value="" placeholder="请输用户名">
-		    		<input id="password" type="password" class="password" name="password" value="" placeholder="请输入密码">
-		    		<button class="aui-btn aui-btn-primary aui-btn-block" type="submit" id="submit" @clicl="reg">登 录</button>
+		    	<div class="form">
+		    		<input id="name" type="text" class="username" name="name" value="" placeholder="请输用户名" v-model="username">
+		    		<input id="password" type="password" class="password" name="password" value="" placeholder="请输入密码" v-model="password">
+		    		<button class="aui-btn aui-btn-primary aui-btn-block" id="submit" @click="load">登 录</button>
 		    		<div style="line-height: 50px;">
 	                    <a class="aui-pull-left" >忘记密码?</a>
 	                    <a class="aui-pull-right" style="color:#F26200"  @click="changepage">免费注册</a>
 	                </div>
-		    	</form>
+		    	</div>
 		    	
 		    </div>
 
@@ -26,38 +26,53 @@
 	</template>
    
 
-    <style>
-
-   /* @font-face {
-		font-family: 'iconfont';
-		src: url('img/font_hth9hqj92bgzm2t9/iconfont.eot');
-		src: url('img/font_hth9hqj92bgzm2t9/iconfont.eot?#iefix') format('embedded-opentype'),
-		url('img/font_hth9hqj92bgzm2t9/iconfont.woff') format('woff'),
-		url('img/font_hth9hqj92bgzm2t9/iconfont.ttf') format('truetype'),
-		url('img/font_hth9hqj92bgzm2t9/iconfont.svg#iconfont') format('svg');
-	}
-
-	.iconfont{
-	  font-family:"iconfont" !important;
-	  font-size:16px;font-style:normal;
-	  -webkit-font-smoothing: antialiased;
-	  -webkit-text-stroke-width: 0.02rem;
-	  -moz-osx-font-smoothing: grayscale;
-	}*/
     
-    *{
-	    margin:0; 
-	    padding:0;
-    }
-    body {
-	    background-color: #f2f2f2;
-	    color: #555;
-	    max-width: 60rem;
-	    margin: 0 auto;
+	<script>
+
+	import router from "../router";
+
+	export default {
+	  name: 'loding',
+	  data () {
+	    return {
+	       // categorylist:[],
+	       // goodslist:[],
+	       // currentIndex:0,
+	       // isShow:true
+	       postslist:[],
+	       username:"",
+	       password:""
+	    }
+	  },
+
+	  methods:{
+	  	changepage(){
+  			router.push({name:"zhuce"})
+  		},
+  		load(){
+  			var _this=this;
+            this.$http.post("http://10.2.158.246:3000/login",{username:_this.username,password:_this.password}).then(res=>{
+             console.log(res.body)
+             if(res.body==0){
+
+                    alert('用户名或密码错误！')
+             }else{
+                router.push({name:"home"})
+             }
+
+            })
+        }
+
+	  }
+ 
 	}
-    ul, li {
-	    list-style: none;
-	}
+
+
+    </script>
+
+	<style scoped>
+
+  
 	p {
 	    margin-top: 0;
 	    margin-bottom: 0;
@@ -210,46 +225,6 @@
 
 	</style>
 
-	<script>
-
-	import router from "../router";
-
-	export default {
-	  name: 'loding',
-	  data () {
-	    return {
-	       // categorylist:[],
-	       // goodslist:[],
-	       // currentIndex:0,
-	       // isShow:true
-	       postslist:[]
-	    }
-	  },
-
-	  methods:{
-
-	  	changepage(){
-  		//router.push(`/goods/detail/${id}`); //es6 字符串模板
-  			router.push({name:"zhuce"})
-
-  		},
-
-  		reg (){
-            this.$http.get("http://10.2.158.246:3000/homeapi/posts").then(res=>{
-             console.log(res.body.data.list)
-                    // this.postslist=res.body.data.list;
-
-            })
-        }
-
-	  }
- 
-	}
-
-
-    </script>
-
-	
 
 	
 
