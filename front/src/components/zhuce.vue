@@ -2,7 +2,7 @@
         <div class="zhuce">
             <header class="aui-bar aui-bar-nav aui-bar-danger">
                 <a class="aui-pull-left" onclick="history.go(-1)">
-                    <span class="aui-icon icon-left iconfont">&#xe60a;</span>
+                    <span class="aui-icon icon-left iconfont">&#xe647;</span>
                 </a>
                 <div class="aui-title"><a href="index.html"> 鼎城商城注册</a></div>
             </header>
@@ -10,7 +10,7 @@
                 <form class="form" method="post">
                     <input v-model="username" id="name" type="text" class="username" name="name" value="" placeholder="请输用户名">
                     <input v-model="password" id="password" type="password" class="password" name="password" value="" placeholder="6-12位字符组合密码">
-                   <div class="popb" style="display:none">密码与要求不符</div>
+                    <div class="popb" style="display:none">密码与要求不符</div>
                     <div class="succ" style="display:none"></div>
 
 

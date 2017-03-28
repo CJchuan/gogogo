@@ -8,21 +8,21 @@
 	                 <p id="info">
 	            <button class="aui-btn aui-btn-danger" style="padding-bottom:3px" @click="changepage">点击登录或注册</button></p>
 	        </div>
-	        <div class="righticon"><i class="iconfont">&#xe627;</i></div>
+	        <div class="righticon"><i class="iconfont">&#xe647;</i></div>
     	</div>
 
     	<div class="aui-content grid3">
     		<ul class="aui-grid-nine">
     			<li class="aui-col-xs-4 aui-text-center">
-    				<span class="aui-icon  aui-text-warning"><i class="iconfont">&#xe627;</i></span>
+    				<span class="aui-icon  aui-text-warning"><i class="iconfont">&#xe6cb;</i></span>
     				<p id="money">余额0￥</p>
     			</li>
     			<li class="aui-col-xs-4 aui-text-center">
-    				<span class="aui-icon aui-text-primary"><i class="iconfont">&#xe627;</i></span>
+    				<span class="aui-icon aui-text-primary"><i class="iconfont">&#xe68c;</i></span>
     				<p id="money">惠民币0</p>
     			</li>
     			<li class="aui-col-xs-4 aui-text-center">
-    				<span class="aui-icon aui-text-danger "><i class="iconfont">&#xe627;</i></span>
+    				<span class="aui-icon aui-text-danger "><i class="iconfont">&#xe629;</i></span>
     				<p id="money">红包0个</p>
     			</li>
     		</ul>
@@ -30,23 +30,21 @@
     	<ul class="aui-list-view">
     		<li class="aui-list-view-cell">
 	            <a class="aui-arrow-right" >
-	               <i class="aui-icon  aui-bg-danger_  ">&#xe602;</i>订单记录
+	               <i class="aui-icon  aui-bg-danger_  iconfont">&#xe60b;</i>订单记录
 	                <span class="aui-badge aui-badge-danger" id="count_order">0</span>
-	                <i class="iconfont">&#xe627;</i>
+	                <span class="iconn"><i class="iconfont">&#xe647;</i></span>
 	            </a>
 	        </li>
 	        <li class="aui-list-view-cell">
 	            <a class="aui-arrow-right" >
-	                <i class="aui-icon aui-bg-danger_ iconfont">&#xe6fc;</i>我的收藏
-	                <span class="aui-badge-danger aui" id="count_order"></span>
-	                <i class="iconfont">&#xe627;</i>
+	                <i class="aui-icon aui-bg-danger_ iconfont">&#xe61f;</i>我的收藏
+	                <span class="aui" id="count_order"><i class="iconfont">&#xe647;</i></span>
 	            </a>
 	        </li>
 	        <li class="aui-list-view-cell">
 	            <a class="aui-arrow-right"   @click="changead">
-	                <i class="aui-icon  aui-bg-danger_ iconfont">&#xe674;</i>收货地址
-	                <span class="aui-badge-danger aui" id="count_order"></span>
-	                <i class="iconfont">&#xe627;</i>
+	                <i class="aui-icon  aui-bg-danger_ iconfont">&#xe67c;</i>收货地址
+	                <span class="aui" id="count_order"><i class="iconfont">&#xe647;</i></span>
 	            </a>
 	        </li>
     	</ul>
@@ -55,20 +53,19 @@
 	            <a class="aui-arrow-right">
 	                <i class="aui-icon  iconfont">&#x3433;</i>我的二维码
 	                <span class="aui-badge aui-badge-primary aui-con" id="count_order">0</span>
-	                <i class="iconfont">&#xe627;</i>
+	                <span class="iconn"><i class="iconfont">&#xe647;</i></span>
 	            </a>
 	        </li>
 	        <li class="aui-list-view-cell">
 	            <a class="aui-arrow-right">
 	                <i class="aui-icon  iconfont">&#xe61d;</i>鼎城商城客服
-	                <span class="aui-badge-danger aui-o" id="count_order"></span>
-	                <i class="iconfont">&#xe627;</i>
+	                <span class="aui-o" id="count_order"><i class="iconfont">&#xe647;</i></span>
 	            </a>
 	        </li> 
     	</ul>
     	<ul class="aui-list-view" style="margin-bottom:60px;">
 	        <li class="aui-list-view-cell">
-	            <a class="aui-arrow-right"><i class="aui-icon  iconfont">&#xe661;</i>关于鼎城商城</a>
+	            <a class="aui-arrow-right"><i class="aui-icon  iconfont">&#xe607;</i>关于鼎城商城</a>
 	        </li>
 	    </ul>
 	    </div>
@@ -155,6 +152,7 @@
 	.head .info p {
 	    font-size: 1.4rem;
 	    color: #666;
+	    margin-top: 0.5rem;
 	}
 
 	.aui-btn-danger {
@@ -302,7 +300,7 @@
 	    background-color: #e74c3c;
 	}
 	.aui{
-		margin-left: 24.1rem;
+		float:right;
 	}
 	.aui-badge-primary {
 	    color: #ffffff;
@@ -312,7 +310,7 @@
 		margin-left:21rem;
 	}
 	.aui-o{
-		margin-left:22rem;
+		float:right;
 	}
 	.aui-list-view-cell > a.aui-arrow-right > .aui-badge, .aui-list-view-cell > div.aui-arrow-right > .aui-badge {
 	    position: absolute;
@@ -320,6 +318,14 @@
 	    right: 3rem;
 	    -webkit-transform: translateY(-50%);
 	    transform: translateY(-50%);
+	}
+
+	.iconn{
+		float:right;
+	}
+
+	.aui-grid-nine li .aui-icon i{
+		font-size:3rem;
 	}
 	
 
