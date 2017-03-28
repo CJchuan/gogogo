@@ -1,8 +1,10 @@
 <template>
 
-    <div>
+    <div class='cont'>
     	<div class="head" id="log">
-    		<div class="face"><img id="avatar" src="../assets/images/noface.png"></div>
+    		<div class="face">
+    			<img id="avatar" src="../assets/images/em.gif">
+    		</div>
     		<div class="info">
 	            <h3 id="nickname" v-if="nossion">登录鼎城商城</h3>
 	            <h3 id="nickname" v-else>欢迎回来，{{uname}}</h3>
@@ -11,7 +13,7 @@
 	            	<button class="aui-btn aui-btn-danger" style="padding-bottom:3px" @click="changepage" v-else>退出当前登录</button> 	
 	            </p>
 	        </div>
-	        <div class="righticon"><i class="iconfont">&#xe647;</i></div>
+
     	</div>
 
     	<div class="aui-content grid3">
@@ -35,19 +37,19 @@
 	            <a class="aui-arrow-right" >
 	                <span><i class="iconfont">&#xe60b;</i>订单记录</span>
 	                <span class="aui-badge aui-badge-danger" id="count_order">0</span>
-	                <span class="iconn"><i class="iconfont">&#xe647;</i></span>
+	               
 	            </a>
 	        </li>
 	        <li class="aui-list-view-cell">
 	            <a class="aui-arrow-right" >
 	                <span><i class="iconfont">&#xe61f;</i>我的收藏</span>
-	                <span class="aui" id="count_order"><i class="iconfont">&#xe647;</i></span>
+	               
 	            </a>
 	        </li>
 	        <li class="aui-list-view-cell">
 	            <a class="aui-arrow-right"   @click="changead">
 	                <i class="iconfont">&#xe67c;</i>收货地址  <!-- aui-icon --> 
-	                <span class="aui" id="count_order"><i class="iconfont">&#xe647;</i></span>
+	               
 	            </a>
 	        </li>
     	</ul>
@@ -56,13 +58,13 @@
 	            <a class="aui-arrow-right">
 	                <i class="iconfont">&#x3433;</i>我的二维码
 	                <span class="aui-badge aui-badge-primary aui-con" id="count_order">0</span>
-	                <span class="iconn"><i class="iconfont">&#xe647;</i></span>
+	              
 	            </a>
 	        </li>
 	        <li class="aui-list-view-cell">
 	            <a class="aui-arrow-right">
 	                <i class="iconfont">&#xe61d;</i>鼎城商城客服
-	                <span class="aui-o" id="count_order"><i class="iconfont">&#xe647;</i></span>
+	               
 	            </a>
 	        </li> 
     	</ul>
@@ -94,14 +96,14 @@
 	   beforeRouteEnter(to,from,next){
         next(vm=>{
           
-            vm.$http.get('/upsession').then(res=>{
+            vm.$http.post('/upsession').then(res=>{
             console.log(res)
                     if(res.data=="null"){
                        vm.nossion=true
                     }else{
                     console.log(res.body)
                       vm.nossion=false;
-                      vm.uname=res.data;
+                      vm.uname=res.data.nickname;
                     }
                     console.log( vm.nossion)
             });
@@ -249,6 +251,7 @@
 
 	.aui-text-center {
 	    text-align: center !important;
+
 	}
 
 	.aui-grid-nine li .aui-icon {
@@ -259,7 +262,7 @@
 	}
 	.aui-grid-nine li{
 	    border-left: 0.1rem solid #f2f2f2;
-	    /*border-bottom: 0.1rem solid #e2e2e2;*/
+	    border-bottom: 0.1rem solid #e2e2e2;
 	    box-sizing: border-box;
 	}
 	.aui-text-warning {
@@ -274,6 +277,7 @@
 
 	.aui-list-view {
 	    margin-bottom: 1rem;
+	    background:#aaa;
 	}
 	.aui-list-view {
 	    position: relative;
@@ -286,6 +290,7 @@
 	}
 	.aui-list-view-cell {
 	    padding: 1rem 1.2rem;
+
 	}
 	.aui-list-view-cell > a {
 	    position: relative;
@@ -296,6 +301,7 @@
 	    color: inherit;
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
+	      border-bottom:.1rem solid #ccc;
 	}
 	/*.aui-list-view-cell > a {
 	    margin: -1rem -1.5rem;

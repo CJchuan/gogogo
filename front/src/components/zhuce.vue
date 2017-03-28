@@ -27,32 +27,33 @@
 
    
     <script>
-
+    import { MessageBox } from 'mint-ui';
     import router from "../router";
-
+    import { Toast } from 'mint-ui';
     export default {
       name: 'zhuce',
       data () {
         return {
-           // categorylist:[],
-           // goodslist:[],
-           // currentIndex:0,
-           // isShow:true
            postslist:[],
            password:'',
-           username:''
-
+           username:'',
+            canuseinfo:{
+            message: '账号名可用',
+            duration: 1000,
+             iconClass: 'icon icon-success'
+            },
+            nouseinfo:{
+            message: '账号名重复',
+            duration: 1000,
+             iconClass: 'icon icon-error'
+            }
 
         }
       },
-
-
       methods:{
 
         changepage(){
-        //router.push(`/goods/detail/${id}`); //es6 字符串模板
             router.push({name:"loading"})
-
         },
 
         reg(){
@@ -68,9 +69,12 @@
                 }).then(function(result){
                 console.log(result);
                 if(result==1){
+                    MessageBox({
+                    title: '提示',
+                message: '注册成功'
+                });
                     router.push({name:"loading"});
                 }else{
-                  alert('注册失败！')
                 }
             })
 

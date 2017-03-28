@@ -28,20 +28,25 @@
 
     
 	<script>
-
 	import router from "../router";
-
+    import { Toast } from 'mint-ui';
 	export default {
 	  name: 'loding',
 	  data () {
 	    return {
-	       // categorylist:[],
-	       // goodslist:[],
-	       // currentIndex:0,
-	       // isShow:true
 	       postslist:[],
 	       username:"",
-	       password:""
+	       password:"",
+	        successinfo:{
+            message: '登录成功',
+            duration: 2000,
+             iconClass: 'icon icon-success'
+            },
+            errorinfo:{
+            message: '用户名或密码错误',
+            duration: 3000,
+             iconClass: 'icon icon-error'
+            }
 	    }
 	  },
 
@@ -54,9 +59,9 @@
             this.$http.post("/login",{username:_this.username,password:_this.password}).then(res=>{
              console.log(res.body)
              if(res.body==0){
-
-                    alert('用户名或密码错误！')
+                    Toast(_this.errorinfo)
              }else{
+             Toast(_this.successinfo)
                 router.push({name:"mine"})
              }
 
