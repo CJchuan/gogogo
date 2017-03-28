@@ -9,15 +9,15 @@
 		        <div class="aui-title"><a href="index.html"> 鼎城商城</a></div>
 		    </header>
 		    <div style="padding:20px;">
-		    	<form class="form" method="post">
-		    		<input id="name" type="text" class="username" name="name" value="" placeholder="请输用户名">
-		    		<input id="password" type="password" class="password" name="password" value="" placeholder="请输入密码">
-		    		<button class="aui-btn aui-btn-primary aui-btn-block" type="submit" id="submit" @click="reg">登 录</button>
+		    	<div class="form">
+		    		<input id="name" type="text" class="username" name="name" value="" placeholder="请输用户名" v-model="username">
+		    		<input id="password" type="password" class="password" name="password" value="" placeholder="请输入密码" v-model="password">
+		    		<button class="aui-btn aui-btn-primary aui-btn-block" id="submit" @click="load">登 录</button>
 		    		<div style="line-height: 50px;">
 	                    <a class="aui-pull-left" >忘记密码?</a>
 	                    <a class="aui-pull-right" style="color:#F26200"  @click="changepage">免费注册</a>
 	                </div>
-		    	</form>
+		    	</div>
 		    	
 		    </div>
 
@@ -46,15 +46,10 @@
 	  },
 
 	  methods:{
-
 	  	changepage(){
-  		//router.push(`/goods/detail/${id}`); //es6 字符串模板
   			router.push({name:"zhuce"})
-
   		},
-
-  		reg (ev){
-  			ev.preventDefault();
+  		load(){
   			var _this=this;
             this.$http.post("http://10.2.158.246:3000/login",{username:_this.username,password:_this.password}).then(res=>{
              console.log(res.body)
