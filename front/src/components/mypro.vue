@@ -87,24 +87,27 @@
 	       goodslist:[],
 	       currentIndex:0,
 	       isShow:true,
-	       nossion:false,
+	       nossion:true,
 	       uname:''
 	    }
 	  },
-	  mounted(){
-	  		 this.$http.get('http://10.2.158.246:3000/mysession')
-              .then( response=>{
-                    console.log(response.data);
-                    if(response.data=="null"){
-                       this.nossion=true
+	   beforeRouteEnter(to,from,next){
+        next(vm=>{
+          
+            vm.$http.get('/upsession').then(res=>{
+            console.log(res)
+                    if(res.data=="null"){
+                       vm.nossion=true
                     }else{
-                      this.nossion=false;
-                      this.uname=response.data;
+                    console.log(res.body)
+                      vm.nossion=false;
+                      vm.uname=res.data;
                     }
-              });
-              
-	  },
-
+                    console.log( vm.nossion)
+            });
+                    
+        })
+    },
 	  methods:{
 
 	  	changepage(){

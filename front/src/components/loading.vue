@@ -51,7 +51,7 @@
   		},
   		load(){
   			var _this=this;
-            this.$http.post("http://10.2.158.246:3000/login",{username:_this.username,password:_this.password}).then(res=>{
+            this.$http.post("/login",{username:_this.username,password:_this.password}).then(res=>{
              console.log(res.body)
              if(res.body==0){
 
