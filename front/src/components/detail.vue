@@ -44,15 +44,19 @@
 </template>
 
 <script>
-	import { Swipe, SwipeItem } from 'vue-swipe';
-require('vue-swipe/dist/vue-swipe.css');
+		import { Swipe, SwipeItem } from 'vue-swipe';
+	  require('vue-swipe/dist/vue-swipe.css');
     export default{
     	data(){
     		return{
     			   goods:{}
     		}
     	},
-    	
+    	 components:{
+        "swipe":Swipe,
+        "swipe-item":SwipeItem
+      },
+
     	mounted(){
     		 this.$http.get("http://10.2.158.246:3000/homeapi/detail?id="+this.$route.params.detid).then(res=>{
    		 		  console.log(res);

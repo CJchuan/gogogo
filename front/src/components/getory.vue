@@ -69,8 +69,8 @@
 
 <style>
 	.active{
-   	    color: #DE3535;
-	    border-left: 2px solid #DE3535;
+   	  color: #DE3535;
+	    
 	    background:#f2f2f2;
    }
 
