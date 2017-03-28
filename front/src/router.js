@@ -92,7 +92,7 @@ const routes=[
     ]
 },
 {path:"/mine",component:Mine},
-{path:"*",redirect:'/community'}
+{path:"*",redirect:'/home'}
 
 
 ]
