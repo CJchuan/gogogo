@@ -1,28 +1,36 @@
 var express = require('express');
 var router = express.Router();
 var user= global.dbhandler.getModelByType("user");
-
-//只能匹配get请求
-router.get("/",function(req,res,next){
-    //req.query 获取前端的get请求的数据
-    res.send(res);
+function Arandom (){
+    return Math.random().toFixed(4)*10000;
+}
+//判断用户名是否已经存在
+router.post("/isonly",function(req,res,next){
+    user.find({nickname:req.body.username},function(error,data){
+            if(!error){
+                if(data.length>0){
+                    res.send('0');
+                }else{
+                    res.send('1');
+                }
+            }
+    })
 })
-
-//下面只能匹配post请求
-router.post("/",function(req,res,next){
+//点击注册
+router.post("/goReg",function(req,res,next){
     //console.log(req.body); //获取前端post的数据
-
     //将注册的数据存储到数据库mongodDB
-
     //插入文档到users 集合
-    user.create({
-        name:req.body.name,
-        email:req.body.email,
+        user.create({
+        nickname:req.body.username,
         password:req.body.password
     },function(err,data){
         if(!err){
-            res.redirect("/login");
-            //当注册成功，就跳转到登录页面
+            console.log(data._id);
+            res.send("1");
+            //当注册成功，返回1
+        }else{
+            res.send("0");
         }
     })
 });

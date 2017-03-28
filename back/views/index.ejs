@@ -7,5 +7,18 @@
   <body>
     <h1>当前不是项目入口</h1>
     <p><a href="/main.html">请移步此链接</a></p>
+    <script type="text/javascript">
+       fetch("/register/goReg",{
+            method:'post',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "username=xiaoming&password=aaaaaaaa"
+        }).then(function (response) {
+            return response.json();//json对象
+        }).then(function(result){
+            console.log(result);
+        })
+    </script>
   </body>
 </html>

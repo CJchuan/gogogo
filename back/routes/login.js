@@ -11,7 +11,7 @@ router.post("/",function(req,res,next){
 
     //查询集合users 有没有这个email & password 对应的数据
     user.find({
-        name:req.body.username,
+        nickname:req.body.username,
         password:req.body.password
     },function(error,data){
         if(!error){
@@ -19,7 +19,7 @@ router.post("/",function(req,res,next){
             console.log(data);
            if(data.length==0){
                //用户名密码输入错误
-               res.render("login",{title:"登录页面",isShowError:true});
+               res.send("0");
            }else{
                //设置sessionID 为有效id
                req.session.kerwinuser= data[0];

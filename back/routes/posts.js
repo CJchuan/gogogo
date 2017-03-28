@@ -14,48 +14,48 @@ router.get('/read', function(req, res, next) {
     })
 });
 
-function Arandom (){
-    return Math.random().toFixed(4)*10000;
-}
+// function Arandom (){
+//     return Math.random().toFixed(4)*10000;
+// }
 router.get('/write', function(req, res, next) {
     //发布帖子
-     posts.find({
-            postid:Arandom ()
-    },function(error,data){
-      if(!error){
-        console.log(data);
-        if(data.length>0){
-             Arandom(); 
-        }else{
-            var id=Arandom();
-             write(id);
-        }
+    //  posts.find({
+    //         postid:Arandom ()
+    // },function(error,data){
+    //   if(!error){
+    //     console.log(data);
+    //     if(data.length>0){
+    //          Arandom(); 
+    //     }else{
+    //         var id=Arandom();
+    //          write(id);
+    //     }
       
-      }
-    })
-    function write(id){
-         posts.create({
-        userid:req.query.userId,
-        postid:id,
-        name:req.query.username,
-        word:req.query.word,
-        otime:new Date(),
-        imghash:req.query.imgurl,//头像
-        imglist:req.query.imgurllist,//插入的图片
-        zan:0,
+    //   }
+    // })
+ 
+      posts.create({
+        postid:0,
+        uid:req.query.userId,
+        nickname:req.query.username,
+        content:req.query.word,
+        ctime:new Date(),
+        avatar:req.query.imgurl,//头像
+        attachs:req.query.imgurllist,//插入的图片
+        digg:0,
         view:0,
         apply:0
     },function(error,data){
       if(!error){
         console.log(data);
+         console.log(data._id);
         res.send(data);
       }
     })
-    }
    
 });
-router.get('/zan', function(req, res, next) {
-    //zan
+router.get('/digg', function(req, res, next) {
+    //赞帖子
     posts.update(
        {postid: req.query.postid}, {$set: {zan: req.query.newzancount}
     },function(error,data){
