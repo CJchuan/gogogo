@@ -83,7 +83,7 @@ bottom:0;
 .wrap{
     overflow-y:scroll;
     flex:1;
-    box-sizing:boeder-box;
-    margin-bottom:2rem;
+    box-sizing:border-box;
+    padding-bottom:4rem;
 }
 </style>
