@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { Indicator } from 'mint-ui';
 		import { Swipe, SwipeItem } from 'vue-swipe';
 	  require('vue-swipe/dist/vue-swipe.css');
     export default{
@@ -56,10 +57,22 @@
         "swipe":Swipe,
         "swipe-item":SwipeItem
       },
+      beforeRouteEnter(to,from,next){
+        next(vm=>{
+            Indicator.open();
+            vm.$http.get(`http://10.2.158.246:3000/homeapi/detail?id=${vm.$route.params.detid}`).then(res=>{
+               console.log(res.body.data)
+                    vm.goods=res.body.data;
+                 Indicator.close();
+            });
+                    
+        })
+    }, 
+
 
     	mounted(){
     		 this.$http.get("http://10.2.158.246:3000/homeapi/detail?id="+this.$route.params.detid).then(res=>{
-   		 		  console.log(res);
+   		 	
      		 		this.goods=res.body.data;
 //  		 		this.handleClick(0,this.datalist[0].id);//页面初始化
 //  		 		this.hname=this.datalist[0].mname; //默认加载第一个的名字
