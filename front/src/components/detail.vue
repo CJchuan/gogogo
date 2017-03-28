@@ -36,17 +36,18 @@
 				   	<ul class="footer">
 	  	  	    <li>客服</li>	
 	  	  	    <li>收藏</li>	
-	  	  	    <li class="shopcar">加入购物车</li>	
-	  	  	    <li class="buy">立即购买</li>	
+	  	  	    <li class="shopcar" @click="addcar(goods.id)">加入购物车</li>	
+	  	  	    <li class="buy" @click="gocar">立即购买</li>	
 	  	  	 </ul>
-    <!--我是详情页面----{{$route.params.id}}-->
   </div>
 </template>
 
 <script>
+import router from "../router";
+import { Toast } from 'mint-ui';
 import { Indicator } from 'mint-ui';
-		import { Swipe, SwipeItem } from 'vue-swipe';
-	  require('vue-swipe/dist/vue-swipe.css');
+import { Swipe, SwipeItem } from 'vue-swipe';
+require('vue-swipe/dist/vue-swipe.css');
     export default{
     	data(){
     		return{
@@ -67,27 +68,33 @@ import { Indicator } from 'mint-ui';
             });
                     
         })
-    }, 
-
-
-    	mounted(){
-    		 this.$http.get("http://10.2.158.246:3000/homeapi/detail?id="+this.$route.params.detid).then(res=>{
-   		 	
-     		 		this.goods=res.body.data;
-//  		 		this.handleClick(0,this.datalist[0].id);//页面初始化
-//  		 		this.hname=this.datalist[0].mname; //默认加载第一个的名字
-    		 		
-    		 	},error=>{
-    		 		
-    		 	})
-
-
-    	},
-    	
+    },     	
     	methods:{
     		 changeBack(){
     		 	  history.go(-1);
-    		 }
+    		 },
+             addcar(id){
+                this.$http.post('http://10.2.158.246:3000/shopcar',{goodsID:id}).then(res=>{
+                 console.log(res.body.data)
+                 if(res.body.data=='1'){
+                    Toast({
+                        message: '加入购物车成功',
+                        position: 'bottom',
+                        duration: 3000
+                });
+                 }else{
+                     Toast({
+                        message: '加入购物车失败',
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                 }
+                })
+             },
+             gocar(){
+              router.push({name:"shopcar"})
+             }
+
     	}
     }
 

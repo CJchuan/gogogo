@@ -86,7 +86,7 @@ const routes=[
        }
     ]
   },
-{path:"/shopcar",component:Shopcar},
+{path:"/shopcar",component:Shopcar,name:"shopcar"},
 {
     path:"/community",
     component:Community,

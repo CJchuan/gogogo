@@ -10,7 +10,7 @@
     
     	<ul class="nav-ul">
     		<li v-for="(data,index) in datalist"  @click="handleClick
-      		(index,data.id)" v-bind:class="currentIndex==index?'active':''">{{data}}</li>
+      		(index,$route.params.cateid)" v-bind:class="currentIndex==index?'active':''">{{data}}</li>
     	</ul>
     	
      	<ul class="goods-ul" v-if="0==currentIndex">    	   	 
@@ -99,7 +99,7 @@
                      this.currentIndex=1;
                      this.$http.get("http://10.2.158.246:3000/homeapi/list/hot?id="+id).then(res=>{
                      console.log(res.body.data);
-    		 		//this.kerwinlist=res.body.data.list;
+    		 		this.kerwinlist=res.body.data.list;
     		 		
     		 	},error=>{
     		 		
@@ -110,7 +110,7 @@
                      this.currentIndex=2;
                      this.$http.get("http://10.2.158.246:3000/homeapi/list/price?id="+id).then(res=>{
                      console.log(res.body.data);
-    		 		//this.kerwinlist=res.body.data.list;
+    		 		this.kerwinlist=res.body.data.list;
     		 		
     		 	},error=>{
     		 		
@@ -123,7 +123,6 @@
 	       },
 	    		
 	    		changePage(id){
-	    			//console.log(id);
 	    			router.push({name:'detail',params:{detid:id}})
 	    		},
 	    		
