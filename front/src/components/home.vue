@@ -15,7 +15,7 @@
         </header>
         <nav>
             <ul>
-                <li @click="changelist">
+                <li>
                     <i class="iconfont one">&#xe60b;</i>
                     <span>抢低价</span>
                 </li>
