@@ -1,9 +1,10 @@
 <template>
     <div class="shopcar">
-        <div class="header">
+        <div class="header2">
                 <left></left>
                 <h2>购物车<span(5)</span></h2>
         </div>
+      <div class="wrap">
        <table width="100%" align="center" cellpadding="0" border-bottom=".1rem solid #ccc" style="border-collapse:collapse; border-spacing:0px 10px;">
             <tr style="border-bottom:.1rem solid #fff">
                 <td width="5%">
@@ -54,6 +55,7 @@
                 </td>
             </tr>
        </table>
+       </div>
        <table class="bot">
             <tr>
                 <td width="5%">
@@ -89,18 +91,7 @@
 </script>
 
 <style scoped>
-        .header{
-        height:4rem;
-         line-height:4rem;
-        color:#bc946e;
-        }
-    h2{
-        text-align:center;
-        height:4rem;
-        border-bottom:.1rem solid #ccc;
 
-        display:inline-block
-    }
     input[type=checkbox]{
         visibility:hidden;
         width:100%;

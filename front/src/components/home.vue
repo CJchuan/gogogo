@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home cont">
     home
         <keep-alive>
             <router-view></router-view>

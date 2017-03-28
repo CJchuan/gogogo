@@ -11,6 +11,12 @@ router.get("/home",function(req,res,next){
         res.send(result); // 如果渲染模板 res.render("")
     });
 });
+router.get("/lists",function(req,res,next){
+    //回调函数
+    spider("/api?c=goods&a=index&catid=null&title=&order=&orderby=desc&page=1",function (result) {
+        res.send(result); // 如果渲染模板 res.render("")
+    });
+});
 //分类1
 router.get("/category1",function(req,res,next){
     //回调函数
@@ -28,7 +34,7 @@ router.get("/category2",function(req,res,next){
 //商品列表综合排序
 router.get("/list/def",function(req,res,next){
     //回调函数
-    spider("http://dc.srh9.com/api?c=goods&a=index&catid="+req.query.id+"&title=&order=def&orderby=desc&page=1",function (result) {
+    spider("/api?c=goods&a=index&catid="+req.query.id+"&title=&order=&orderby=desc&page=1",function (result) {
         res.send(result); // 如果渲染模板 res.render("")
     });
 });

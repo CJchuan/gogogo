@@ -1,5 +1,6 @@
 <template>
     <div class="classify">
+    classify
         <keep-alive>
             <router-view></router-view>
         </keep-alive>

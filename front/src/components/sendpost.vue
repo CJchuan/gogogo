@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import left from "./left.vue";
 import Writecont from "./Writecont.vue";
     export default {
         name:'sendpost',

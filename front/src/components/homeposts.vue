@@ -1,6 +1,6 @@
 <template>
-<div id="homeposts">
-        <ul class='header' @click="changePage">
+<div id="homeposts" class='cont'>
+        <ul class='headers' @click="changePage">
             <li data-id="0">
                <div data-id="0"> 
                     <i class="c7ce3e3 iconfont" data-id="0">&#xe678;</i>
@@ -21,12 +21,10 @@
                 </div>
             </li>
         </ul>
-    <div class="homeposts cont" id="homeposts">
+    <div class="homeposts wrap" id="homeposts">
             <poststemp></poststemp>
     </div>
-        <div class="write" @click="changewrite">
-            <i class="iconfont">&#xe6d7;</i> 
-        </div>
+        <write></write>
      <ul class="footer">
         <router-link to="/home" tag="li" active-class="Acitive">
         <i class="iconfont">&#xe608;</i>
@@ -47,7 +45,8 @@
 </template>
 
 <script>
-    import router from "../router"
+    import router from "../router";
+    import write from "./write.vue";
     import poststemp from "./poststemp.vue";
     export default {
         name:'homeposts',
@@ -57,7 +56,8 @@
             }
         },
         components:{
-            poststemp
+            poststemp,
+            write
         },
          methods:{
          changePage(ev){
@@ -67,30 +67,27 @@
             }else{
                 router.push({name:"postslist",pageid:ev.target.dataset.id})
             }
-         },
-         changewrite(){
-                router.push({name:"sendpost"})
          }
         }
     }
 </script>
 
-<style>
+<style scoped>
 .homeposts{
     background:#eee;
-    height:100%;
 }
-.header{
+ul.headers{
+    width:100%;
     height:8.2rem;
     display:flex;
-  
+
 }
-.header li{
+.headers li{
     flex:1;
     text-align:center;
     display:flex;
 }
-.header li i{
+.headers li i{
     display:block;
     width:4.6rem;
     height:4.6rem;
@@ -101,7 +98,7 @@
     color:#fff;
  
     }
-    .header li>div{
+    .headers li>div{
         margin:auto;
         position:relative
     }
@@ -122,24 +119,12 @@
 .fa9529{
     background-color:#fa9529
 }
-.write{
-    position:fixed;
-    right:0;
-    bottom:5rem;
-    width:4rem;
-    height:4rem;
-}
-.write i{
-    font-size:3.2rem;
-    color:red;
-}
-.cont{
+
+
+.wrap ul{
     overflow:hidden;
 }
-.cont ul{
-    overflow:hidden;
-}
-.cont ul li{
+.wrap ul li{
      overflow:hidden;
      background:#fff;
      padding:1.5rem;

@@ -60,9 +60,5 @@
     .mt-button{
      margin:auto
     } 
-    .cont{
-        overflow:hidden;
-        font-size:1.6rem;
-        margin-top:1rem;
-    }
+
 </style>

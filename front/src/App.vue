@@ -22,30 +22,30 @@ export default {
   margin:0;
   padding:0
 }
-body,html{
+body,html,#app{
   font-size:1.2rem;
-  overflow:auto;
   height:100%;
 }
 ul,li{
   list-style:none
 }
 .footer{
-  position:fixed;
-  bottom:0;
+position:fixed;
+bottom:0;
   width:100%;
   height:4rem;
-  line-height:2rem;
   display:flex;
   z-index:10;
   background-color:#fff;
+  border-top:.1rem solid #ccc;
 }
 .footer li{
   text-align:center;
   flex:1
 }
 .footer li i{
-   display:block
+   display:block;
+   margin-top:1rem
 }
 .l{
   float:left
@@ -75,5 +75,15 @@ ul,li{
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.cont{
+    height:100%!important;
+    display:flex;
+    flex-direction:column;
+}
+.wrap{
+    overflow-y:scroll;
+    flex:1;
+    box-sizing:boeder-box;
+    margin-bottom:2rem;
+}
 </style>

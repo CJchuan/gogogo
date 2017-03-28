@@ -28,9 +28,15 @@ import router from "../router"
         line-height:4rem;
         color:#bc9461;
         border-bottom:.1rem solid #ccc;
+        display:flex;
     }
     .header2 h2{
         text-align:center;
-        display:inline-block;
+        font-weight:100;
+        flex:1;
     }
+.community{
+    height:100%;
+    overflow:hidden;
+}
 </style>

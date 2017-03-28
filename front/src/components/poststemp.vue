@@ -1,9 +1,10 @@
 <template>
-    <div class="poststemp cont">
+    <div class="poststemp wrap">
         <ul>
             <li v-for="(data,index) of postslist" @click="changeposdetail(data.id)" :key="data.id">
                 <div class="top">
-                    <img src="" alt=""/>
+                    <img :src="data.avatar" alt="" v-if="data.avatar!=''"/>
+                    <img src="../assets/images/em.gif" alt="" v-else/>
                     <h2>{{data.nickname}}</h2>
                     <p class="sendtime">{{data.ctime}}</p>
                 </div>
@@ -26,11 +27,12 @@
                 </div>                
             </li>
         </ul>
-
+        <write></write>
     </div>
 </template>
 
 <script scoped>
+import  write  from './write.vue';
 import { MessageBox } from 'mint-ui';
 import router from "../router" ;
     export default {
@@ -43,9 +45,14 @@ import router from "../router" ;
         mounted(){
             this.$http.get("http://localhost:3000/homeapi/posts").then(res=>{
             console.log(res.body.data.list)
-                    this.postslist=res.body.data.list
+                    this.postslist=res.body.data.list;
+
             })
         },
+        components:{
+            write
+        },
+        
         methods:{
                 /*
             handlezan(ev){
@@ -66,16 +73,16 @@ import router from "../router" ;
     }
 </script>
 
-<style>
-   .cont{
-    overflow:hidden;
+<style scoped>
+.poststemp{
+     height:100%;
 }
-.cont ul{
-    overflow:auto;
+.poststemp ul{
+
     height:100%;
     margin-bottom:1rem;
 }
-.cont ul li{
+.poststemp ul li{
      overflow:hidden;
      background:#fff;
      padding:1.5rem;

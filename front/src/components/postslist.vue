@@ -1,5 +1,5 @@
 <template>
-    <div class="postslist">
+    <div class="postslist cont">
         <div class="header2">
            <left></left>
             <h2>帖子列表</h2>
