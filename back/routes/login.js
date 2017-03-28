@@ -24,7 +24,7 @@ router.post("/",function(req,res,next){
                //设置sessionID 为有效id
                req.session.kerwinuser= data[0];
                //用户名密码输入正确
-               res.redirect("/home");
+               res.send("1");
            }
         }
     })
