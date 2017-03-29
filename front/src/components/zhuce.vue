@@ -8,7 +8,7 @@
             </header>
             <div style="padding:20px;">
                 <div class="form">
-                    <input v-model="username" id="name" type="text" class="username" name="name" value="" placeholder="请输用户名">
+                    <input v-model="username" id="name" type="text" class="username" name="name" value="" placeholder="2-6位字符">
                     <input v-model="password" id="password" type="password" class="password" name="password" value="" placeholder="6-12位字符组合密码">
                     <div class="popb" style="display:none">密码与要求不符</div>
                     <div class="succ" style="display:none"></div>
@@ -83,35 +83,7 @@
     }
 }
 
-
-
-// var password=document.getElementById("password");//密码
-// var submit=document.getElementById("submit");//点击注册
-// var succ1=document.getElementsByClassName("succ");//对号
-// var popb1=document.getElementsByClassName("popb");//错误的提示
-
-// var re2=/[a-zA-Z]{6,16}/;
-// password.onblur=function(){
-//     if (!re2.test(password.value)) {
-//         popb1.style.display="block";
-//         password.style.border="1px solid red";
-        
-//     }else{
-//         succ1.style.display="block";
-//     }
-// }
-// password.onfocus=function(){
-//     password.style.border="1px solid #3879d9";
-//     popb1.style.display="none";
-//     password.value="";
-
-// }
-
-
-
-
-
-    </script>
+</script>
 
  <style>
 
