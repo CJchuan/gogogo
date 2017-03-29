@@ -65,6 +65,7 @@ module.exports = {
               host: '10.2.158.246:3000',
               changeOrigin: true
           }
+
     }
   },
   performance: {
