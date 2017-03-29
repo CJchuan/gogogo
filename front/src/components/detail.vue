@@ -18,9 +18,9 @@
 			            <span class="market-price">原价:{{goods.market_price}}元</span> 	      
 			   	      </p>
 			   	      <div class="number">
-			   	      	<div class="left">-</div>
-			  	        <input type="text" value="1"/>
-			  	        <div class="right">+</div>
+			   	      	<div class="left" @click="low">-</div>
+			  	        <input type="text"  v-model="number"/>
+			  	        <div class="right" @lick="up">+</div>
 			   	      </div>			  	       	  
 			   	      
 			  	  </div>
@@ -51,7 +51,9 @@ require('vue-swipe/dist/vue-swipe.css');
     export default{
     	data(){
     		return{
-    			   goods:{}
+    			   goods:{},
+                   number:1,
+                   uid:""
     		}
     	},
     	 components:{
@@ -62,7 +64,6 @@ require('vue-swipe/dist/vue-swipe.css');
         next(vm=>{
             Indicator.open();
             vm.$http.get(`http://10.2.158.246:3000/homeapi/detail?id=${vm.$route.params.detid}`).then(res=>{
-               console.log(res.body.data)
                     vm.goods=res.body.data;
                  Indicator.close();
             });
@@ -73,10 +74,31 @@ require('vue-swipe/dist/vue-swipe.css');
     		 changeBack(){
     		 	  history.go(-1);
     		 },
+             up(){
+                   this.number++;
+             },
+             low(){
+              this.number=Math.max(1,this.number-1)
+             },
              addcar(id){
-                this.$http.get('/shopcar/add',{goodsID:id}).then(res=>{
-                 console.log(res.body.data)
-                 if(res.body.data=='1'){
+              var _this=this;
+               this.$http.post('/upsession').then(res=>{
+                    if(res.data=="null"){
+                       router.push({name:"loading"})
+                    }else{
+                       this.uid=res.data.uid;  
+                       this.ADDcar(id,_this)
+                    }
+            });
+               
+             },
+             gocar(){
+              router.push({name:"shopcar"})
+             },
+             ADDcar(id,vm){
+                vm.$http.post('/shopcar/add',{goodsID:id,price:vm.goods.shop_price,bprice:vm.goods.market_price,number:vm.number,goodsname:vm.goods.title}).then(res=>{
+                 console.log(res.body)
+                 if(res.body=='1'){
                     Toast({
                         message: '加入购物车成功',
                         position: 'bottom',
@@ -90,9 +112,6 @@ require('vue-swipe/dist/vue-swipe.css');
                     });
                  }
                 })
-             },
-             gocar(){
-              router.push({name:"shopcar"})
              }
 
     	}

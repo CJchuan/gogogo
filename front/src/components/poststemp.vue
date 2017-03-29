@@ -6,7 +6,7 @@
                     <img :src="data.avatar" alt="" v-if="data.avatar!=''"/>
                     <img src="../assets/images/em.gif" alt="" v-else/>
                     <h2>{{data.nickname}}</h2>
-                    <p class="sendtime">{{data.ctime}}</p>
+                    <p class="sendtime">{{data.otime}}</p>
                 </div>
                 <div class="mid">
                     <p class="word">{{data.content}}</p>
@@ -22,7 +22,7 @@
                     </div>
                     <div calss="apply">
                         <i class="iconfont">&#xe64f;</i>
-                        {{data.comment}}
+                        {{data.apply}}
                     </div>
                 </div>                
             </li>
@@ -43,11 +43,23 @@ import router from "../router" ;
                     postslist:[]
             }
         },
+     /*   beforeRouteEnter(to,from,next){
+        next(vm=>{
+            Indicator.open();
+            vm.$http.get("/posts/read").then(res=>{
+            console.log(res.body)
+                    vm.postslist=res.body;
+                       Indicator.close();
+            })
+                    
+        })
+    },      
+    */
         mounted(){
         Indicator.open();
-            this.$http.get("http://10.2.158.246:3000/homeapi/posts").then(res=>{
-            console.log(res.body.data.list)
-                    this.postslist=res.body.data.list;
+            this.$http.get("/posts/read").then(res=>{
+            console.log(res.body)
+                    this.postslist=res.body;
                        Indicator.close();
             })
         },

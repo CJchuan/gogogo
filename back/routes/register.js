@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var user= global.dbhandler.getModelByType("user");
-function Arandom (){
-    return Math.random().toFixed(4)*10000;
-}
+
 //判断用户名是否已经存在
 router.post("/isonly",function(req,res,next){
     user.find({nickname:req.body.username},function(error,data){
@@ -23,7 +21,8 @@ router.post("/goReg",function(req,res,next){
     //插入文档到users 集合
         user.create({
         nickname:req.body.username,
-        password:req.body.password
+        password:req.body.password,
+        ulogo:"http://10.2.158.246:3000/public/images/em.gif"
     },function(err,data){
         if(!err){
             console.log(data._id);

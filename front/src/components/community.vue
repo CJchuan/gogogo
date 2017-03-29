@@ -1,8 +1,8 @@
 <template>
     <div class="community">
-       <keep-alive>
+  
             <router-view></router-view>
-       </keep-alive>
+
        
     </div>
 

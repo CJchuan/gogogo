@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "cors": "^2.8.1",
-    "express-session": "^1.15.2"
+    "express-session": "^1.15.2",
+    "moment": "^2.18.1"
   }
 }

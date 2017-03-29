@@ -16,17 +16,17 @@ var session  = require("express-session");
 var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require("./api/homeapi");
-var mysession = require("./api/mysession");
 var upsession = require("./routes/upsession");
 var register = require("./routes/register");
 var login = require("./routes/login");
 var posts=require("./routes/posts");
 var shopcar=require("./routes/shopcar");
+var changelogo=require("./routes/changelogo");
 //----------------自定义的路由模块----------------------
 
 
 
-
+var moment = require('moment');
 var app = express();
 //引入cors
 var cors =require("cors");
@@ -64,9 +64,9 @@ app.use('/homeapi', api);
 app.use('/posts', posts);
 app.use('/register', register);
 app.use('/login', login);
-app.use('/mysession', mysession);
 app.use('/upsession', upsession);
 app.use('/shopcar', shopcar);
+app.use('/changelogo', changelogo);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

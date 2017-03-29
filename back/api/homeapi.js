@@ -13,7 +13,7 @@ router.get("/home",function(req,res,next){
 });
 router.get("/lists",function(req,res,next){
     //回调函数
-    spider("/api?c=goods&a=index&catid=null&title=&order=&orderby=desc&page=1",function (result) {
+    spider("/api?c=goods&a=index&catid=null&title=&order=&orderby=desc&page="+req.query.pageid,function (result) {
         res.send(result); // 如果渲染模板 res.render("")
     });
 });

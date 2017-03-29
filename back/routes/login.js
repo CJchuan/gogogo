@@ -25,7 +25,8 @@ router.post("/",function(req,res,next){
                // req.session.uname= data[0].nickname;
                var options={
                    uid:data[0]._id,
-                   nickname:data[0].nickname
+                   nickname:data[0].nickname,
+                   ulogo:data[0].ulogo
                }
                req.session.userinfo= options;
                //用户名密码输入正确

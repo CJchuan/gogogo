@@ -4,14 +4,40 @@
             <left></left>
             <h2>发表帖子</h2>
       </div>
-      <Writecont ref="writecont" ></Writecont>
+
+    <div class="Writecont" id="writecont">
+     <textarea id="content" name="content" style="width:100%;height:20rem;padding:1rem;margin:0;border:0;overflow-y:auto;font-size:1.6rem" placeholder="说点什么吧...(点击加号添加图片，长按图片删除)" v-model="myinput"></textarea>
+      <div class="choosePic">
+            <span class="add">
+                +
+            </span>
+            添加图片（长按删除图片）
+      </div>
+    <div class="Picshow">
+            <img class="add" src="">
+                
+            </img>
+                        <img class="add" src="">
+                
+            </img>
+                        <img class="add" src="">
+                
+            </img>
+                        <img class="add" src="">
+                
+            </img>
+                        <img class="add" src="">
+                
+            </img>
+      </div>
+
+    </div>
       <mt-button type="primary" @click="sendpost">发表</mt-button>
     </div>
 </template>
 
 <script>
 import left from "./left.vue";
-import Writecont from "./Writecont.vue";
 import router from "../router";
 import { Toast } from 'mint-ui';
     export default {
@@ -22,12 +48,13 @@ import { Toast } from 'mint-ui';
                 uid:"",
                 uname:'',
                 uimg:""
-             }
+             },
+                myinput:"",
+                imglist:[]
                 
             }
         },
         components:{
-                Writecont,
                 left
         },
           beforeRouteEnter(to,from,next){
@@ -38,7 +65,7 @@ import { Toast } from 'mint-ui';
                     if(res.data=="null"){
                        router.push({name:"loading"})
                     }else{
-                       vm.userinfo.uid=res.data._id;
+                       vm.userinfo.uid=res.data.uid;
                        vm.userinfo.uname=res.data.nickname;  
                     }
             });
@@ -48,8 +75,7 @@ import { Toast } from 'mint-ui';
         methods:{
           sendpost(){
           var _this=this;
-          console.log(_this.$refs)
-            this.$http.get("http://10.2.158.246:3000/posts/write",{userId:_this.userinfo.uid,username:_this.userinfo.uname,word:_this.$refs.writecont.myinput,avatar:_this.uimg,attachs:_this.$refs.writecont.imglist}).then(res=>{
+            this.$http.post('/posts/write',{word:_this.myinput,imgurllist:_this.imglist}).then(res=>{
                   console.log(res.body);
                   if(res.body=='1'){
                       Toast({ 
@@ -65,5 +91,38 @@ import { Toast } from 'mint-ui';
 </script>
 
 <style scoped>
-
+ .content{
+        height:100%;
+    }
+    .choosePic{
+        background: #f8f8f8;
+        position: relative;
+        padding: .8rem;
+        height:7.2rem;
+        line-height:7.2rem;
+        font-size:1.6rem;
+        color:#999;
+    }
+    .add{
+        display:inline-block;
+        width:7.2rem;
+        height:7.2rem;
+        line-height:7.2rem;
+        text-align:center;
+        font-size:3.2rem;
+  
+        border:.1rem solid #aaa;
+    }
+        .Picshow{
+         width:100%;  
+         height:8rem;
+        overflow-x:scroll; 
+        white-space:nowrap;
+        }
+        .mint-button--normal{
+            padding:0 2rem!important;
+            left:50%;
+            transform:translateX(-50%);
+            width:100%;
+        }
 </style>

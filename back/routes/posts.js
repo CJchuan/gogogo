@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var posts= global.dbhandler.getModelByType("posts");
-
+var moment = require('moment');
 router.get('/read', function(req, res, next) {
     //获取发布过的帖子
     posts.find({
@@ -14,42 +14,25 @@ router.get('/read', function(req, res, next) {
     })
 });
 
-// function Arandom (){
-//     return Math.random().toFixed(4)*10000;
-// }
-router.get('/write', function(req, res, next) {
+router.post('/write', function(req, res, next) {
     //发布帖子
-    //  posts.find({
-    //         postid:Arandom ()
-    // },function(error,data){
-    //   if(!error){
-    //     console.log(data);
-    //     if(data.length>0){
-    //          Arandom(); 
-    //     }else{
-    //         var id=Arandom();
-    //          write(id);
-    //     }
-      
-    //   }
-    // })
- 
       posts.create({
-        uid:req.query.userId,
-        nickname:req.query.username,
-        content:req.query.word,
-        ctime:new Date(),
-        avatar:req.query.imgurl,//头像
-        attachs:req.query.imgurllist,//插入的图片
-        digg:0,
-        view:0,
-        apply:0,
-        list:[]
+        uid:req.session.userinfo.uid,
+        nickname:req.session.userinfo.nickname,
+        content:req.body.word,
+        ctime:moment().format('X'), //时间戳
+        otime:moment().format('YYYY-MM-DD HH:mm:ss'),//格式化后的时间
+        avatar:req.session.userinfo.ulogo,//头像
+        attachs:req.body.imgurllist,//插入的图片
+        digg:0,//点赞数
+        view:0, //查看人数
+        apply:0, //回复数量
+        list:[] //评论列表
     },function(error,data){
       if(!error){
-        console.log(data);
-         console.log(data._id);
         res.send('1');
+      }else{
+        res.send('0')
       }
     })
    
@@ -83,7 +66,7 @@ router.get('/view', function(req, res, next) {
     ,function(error,data){
       if(!error){
         console.log(data);
-        res.send(data);
+        res.send(1);
       }
     })
 });
