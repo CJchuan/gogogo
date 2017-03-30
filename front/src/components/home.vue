@@ -15,7 +15,7 @@
         </header>
         <nav>
             <ul>
-                <li>
+                <li @click="changegoodlist">
                     <i class="iconfont one">&#xe60b;</i>
                     <span>抢低价</span>
                 </li>
@@ -168,8 +168,12 @@ export default {
   },
   methods:{
     changepage(id){   //跳转页面
-        router.push("/shouye/detail/"+id);
-    }
+        router.push({name:"detail",params:{detid:id}});
+
+    },
+     changegoodlist(){
+      router.push({name:"goodlist"})
+    }    
   }
 }
 </script>

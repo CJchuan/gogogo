@@ -36,6 +36,7 @@ const Getory=resolve=>require(["./components/getory.vue"],resolve);
 const List=resolve=>require(["./components/list.vue"],resolve);
     //我的详情
 const Detail=resolve=>require(["./components/detail.vue"],resolve);
+const Goodlist=resolve=>require(["./components/goodlist.vue"],resolve);
 
 
 
@@ -63,6 +64,10 @@ const routes=[
     path:"/home",
     component:Home,
     name:"home"
+},{
+  path:"/goodlist",
+  component:Goodlist,
+  name:"goodlist"
 },
   {
   	path:'/classify', 	
