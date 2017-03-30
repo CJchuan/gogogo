@@ -157,7 +157,7 @@ require('vue-swipe/dist/vue-swipe.css');
 	    	  width:100%;
 				  height: 30rem;
 				  color: #fff;	
-				  margin-top:4.9rem;		  
+				  margin-top:3.6rem;		  
 			}
 			#detail .my-swipe img{
 					width:100%;
