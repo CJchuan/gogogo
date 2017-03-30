@@ -1,7 +1,7 @@
- <template>
+﻿ <template>
   <div id="goodlist" class="list">
     <div class="top">
-         <header>
+         <header>11
              <span class="iconfont" @click="fanhui">&#xe647;</span>
              <h4>商品列表</h4>
              <span class="iconfont">&#xe67a;</span>
