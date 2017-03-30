@@ -49,6 +49,12 @@
             }
 	    }
 	  },
+	  mounted(){
+	  	  //清除session
+	  	   this.$http.post('/clearuser').then(res=>{
+            console.log(res)
+            });
+	  },
 
 	  methods:{
 	  	changepage(){

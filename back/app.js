@@ -22,6 +22,7 @@ var login = require("./routes/login");
 var posts=require("./routes/posts");
 var shopcar=require("./routes/shopcar");
 var changelogo=require("./routes/changelogo");
+var clearuser=require("./routes/clearuser");
 //----------------自定义的路由模块----------------------
 
 
@@ -67,6 +68,7 @@ app.use('/login', login);
 app.use('/upsession', upsession);
 app.use('/shopcar', shopcar);
 app.use('/changelogo', changelogo);
+app.use('/clearuser', clearuser);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
