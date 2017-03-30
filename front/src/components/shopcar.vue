@@ -98,7 +98,7 @@
         },
         mounted(){
           this.$http.post('/shopcar/read').then(res=>{
-              console.log(res.body)
+              console.log(res.body);
           })
         },
         components:{
