@@ -94,7 +94,7 @@
                 this.goodlist=[];
                 this.isshow=false
                 },error=>{
-
+                  console.log(error)
                 })
             },
             loadMore() {
