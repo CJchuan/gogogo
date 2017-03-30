@@ -60,14 +60,17 @@ router.get('/digg', function(req, res, next) {
       }
     })
 });
-router.post('/apply', function(req, res, next) {
+router.get('/apply', function(req, res, next) {
     //评论
+    console.log(req.query)
     posts.update(
-       {_id: req.body.postid}, {$set: {apply: req.body.newapplycount,list:req.body.newlist}}
+       {_id: req.query.postid}, {$set: {apply: req.query.newapplycount,list:JSON.parse(req.query.newlist)}}
     ,function(error,data){
       if(!error){
         console.log(data);
-        res.send(1);
+        res.send("1");
+      }else{
+        res.send('0')
       }
     })
 });

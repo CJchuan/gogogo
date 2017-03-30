@@ -24,10 +24,10 @@
                     <img :src="item.avatar" alt="" v-if="item.avatar!=''" class="l"/>
                     <img src="../assets/images/em.gif" alt="" v-else  class="l"/>
                     <div>
-                    <h5>{{item.nickname}}</h5>
+                    <h5>{{item.uname}}</h5>
                     <p class="content">{{item.content}}</p>
                     <p class="libot">
-                        <span>{{item.ctime}}</span> 
+                        <span>{{item.otime}}</span> 
                         <a>                       
                             <i class="iconfont">&#xe645;</i>{{item.digg}}
                             <i class="iconfont">&#xe64f;</i>{{item.reply}}
@@ -60,14 +60,15 @@ import { Indicator } from 'mint-ui';
 import { MessageBox } from 'mint-ui';
 import router from "../router" ;
 import left from "./left.vue";
+import * as moment from 'moment';
     export default {
         name:'postdetail',
         data(){
             return{
                   data:{},
-                  applylist:['1111'],
+                  applylist:[],
                   changebtn:true,
-                  myapply:"" 
+                  myapply:""
             }
         },
          beforeRouteEnter(to,from,next){
@@ -76,7 +77,7 @@ import left from "./left.vue";
             vm.$http.get(`/posts/detail?postid=${vm.$route.params.poid}`).then(res=>{
                console.log(res.body)
                     vm.data=res.body[0];
-                    vm.applylist=res.body.list;
+                    vm.applylist=res.body[0].list;
                  Indicator.close();
             });
                     
@@ -103,21 +104,25 @@ import left from "./left.vue";
                         router.push({name:"loading"})
                     });
                     }else{
+                    console.log(res.data)
                       var id=res.data.uid;
-                      var name=res.data.name;
+                      var name=res.data.nickname;
                       var avat=res.data.ulogo;
                     _this.data.apply++;
-                    console.log(_this.applylist)
                     _this.applylist.push({
                         uid:id,
                         uname:name,
                         avatar:avat,
-                        content:_this.data.apply,
+                        content:_this.myapply,
                         ctime:moment().format('X'),
                         otime:moment().format('YYYY-MM-DD HH:mm:ss')  
-                    })
-                  
-                     _this.$http.post('/posts/apply',{postid:_this.$route.params.poid,newapplycount:_this.data.apply,newlist:_this.applylist})
+                    });
+                      var newapplylist=JSON.stringify(_this.applylist);
+                      var newapply=encodeURIComponent(newapplylist);
+                      console.log(newapplylist)
+                      _this.$http.get(`/posts/apply?newapplycount=${_this.data.apply}&newlist=${newapplylist}`).then(res=>{
+                        console.log(res.body)
+                      })
               
                     }
             });
