@@ -70,7 +70,7 @@
 <style>
 	.active{
    	  color: #DE3535;
-	    border-left:0.2rem solid #DE3535;
+	    /*border-left:0.2rem solid #DE3535;*/
 	    background:#f2f2f2;
    }
 
