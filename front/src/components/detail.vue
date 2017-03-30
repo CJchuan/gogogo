@@ -88,7 +88,6 @@ require('vue-swipe/dist/vue-swipe.css');
                     }else{
                        this.uid=res.data.uid;  
                        this.ADDcar(id,_this);
-
                     }
             });
                

@@ -213,12 +213,12 @@
       	  width:8.8rem;
      	    height:8.8rem;
           float: left;
-          margin-right: 8px;
+          margin-right: 0.8rem;
       }
       #list .goods-ul li h2{
       	color: #555;
 		    font-size: 1.4rem;
-		    height: 3.2rem;
+		    height: 3.5rem;
 		    overflow: hidden;
 		    margin-bottom:0.2rem;
       }

@@ -70,7 +70,7 @@
 <style>
 	.active{
    	  color: #DE3535;
-	    
+	    border-left:0.2rem solid #DE3535;
 	    background:#f2f2f2;
    }
 
@@ -84,16 +84,15 @@
    #box ul,li{
    	 list-style: none;
    }
-   #box .classifyleft{
-   	    
-   	    overflow-y: auto;
+   #box .classifyleft{  
+   	  overflow-y: auto;
 	    overflow-x: hidden;
 	    width: 25%;
 	    background-color: #fff;
 	    position: fixed;
 	    top: 0;
-	    left: 0;
-	    bottom: 60px;
+	    
+	    bottom:5rem;
    }
    #box .classifyleft li{
    	    width: 7.4rem;
@@ -107,7 +106,7 @@
    }
    #box .smallbox{
 	    box-sizing: border-box;
-	    margin-left:8rem;
+	    margin-left:7.8rem;
 	    width: 75%;
 	    height: 100%;
 	    overflow-y: auto;
@@ -115,18 +114,18 @@
 	    padding-bottom:0.7rem;
    }
    #box .smallbox h2{
-   	    height:4rem;
+   	  height:4rem;
 	    line-height: 4rem;
 	    font-size: 1.6rem;
 	    color: #666;
-	    margin-left: 0.7rem;
+	    margin-left: 1.3rem;
    }
    #box .smallbox ul{
 	    margin: auto;
 	    overflow: hidden;	    
 	    width:24rem;
 	    height:100%;
-	    overflow: auto;
+	    /*overflow: auto;*/
 	   }
 	  #box .smallbox ul li{	    
 	    float:left;
