@@ -3,16 +3,26 @@ var router = express.Router();
 var posts= global.dbhandler.getModelByType("posts");
 var moment = require('moment');
 router.get('/read', function(req, res, next) {
-    //获取发布过的帖子
-    posts.find({
+    //获取发布过的帖子,并倒序
+    // posts.find({},null,{sort: [['_id', -1]]},
+    //  function(error,data){
+    //   if(!error){
+    //       console.log(data);
+    //     res.send(data);
+    //   }else{
+    //     res.send(error)
+    //   }  
+    // });
 
-    },function(error,data){
+    posts.find({},function(error,data){
       if(!error){
-        console.log(data);
-        res.send(data);
+        console.log(data)
+        res.send(data)
+      }else{
+        res.send(error)
       }
     })
-});
+  })  
 router.get('/detail', function(req, res, next) {
     //获取某个帖子详情帖子
     posts.find({
@@ -52,23 +62,25 @@ router.post('/write', function(req, res, next) {
 router.get('/digg', function(req, res, next) {
     //赞帖子
     posts.update(
-       {_id: req.query.postid}, {$set: {zan: req.query.newzancount}
+       {_id: req.query.postid}, {$set: {digg: req.query.newdiggcount}
     },function(error,data){
       if(!error){
         console.log(data);
-        res.send(1);
+        res.send('1');
+      }else{
+        res.send('0')
       }
     })
 });
-router.get('/apply', function(req, res, next) {
+router.post('/apply', function(req, res, next) {
     //评论
-    console.log(req.query)
+    //var arr=JSON.parse(req.body.newlist);
+
     posts.update(
-       {_id: req.query.postid}, {$set: {apply: req.query.newapplycount,list:JSON.parse(req.query.newlist)}}
+       {_id: req.body.postid}, {$set:{list:JSON.parse(req.body.newlist),apply:req.body.newapplycount}}
     ,function(error,data){
       if(!error){
-        console.log(data);
-        res.send("1");
+        res.send(data);
       }else{
         res.send('0')
       }

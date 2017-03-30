@@ -20,7 +20,14 @@ var postsobj = {
         digg:Number,//赞数量
         view:Number,//查看数量
         apply:Number,//回复数量
-        list:Array//评论列表
+        list:[
+                // {uid:String},
+                // {uname:String},
+                // {avatar:String},
+                // {content:String},
+                // {ctime:String},
+                // {otime:String}        
+            ]//评论列表
 }
 //创建article模型，基于这个模型就会创建articles集合
 mongoose.model("posts",new Schema(postsobj));

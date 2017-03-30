@@ -1,22 +1,24 @@
 <template>
     <div class="poststemp wrap">
         <ul>
-            <li v-for="(data,index) of postslist" @click="changeposdetail(data._id,data.view)" :key="data.id">
-                <div class="top">
-                    <img :src="data.avatar" alt=""/>
-                    <h2>{{data.nickname}}</h2>
-                    <p class="sendtime">{{data.otime}}</p>
-                </div>
-                <div class="mid">
-                    <p class="word">{{data.content}}</p>
+            <li v-for="(data,index) of postslist" :key="data._id">
+                <div  @click="changeposdetail(data._id,data.view)" >
+                    <div class="top">
+                        <img :src="data.avatar" alt=""/>
+                        <h2>{{data.nickname}}</h2>
+                        <p class="sendtime">{{data.otime}}</p>
+                    </div>
+                    <div class="mid">
+                        <p class="word">{{data.content}}</p>
+                    </div>
                 </div>
                 <div class="bot">
                     <div calss="view">
                         <i class="iconfont">&#xe63f;</i>
                         {{data.view}}
                     </div>
-                    <div calss="zan"  data-index="index">
-                        <i class="iconfont">&#xe645;</i>
+                    <div calss="zan">
+                        <i class="iconfont" @click="digg(index,data._id)">&#xe645;</i>
                         {{data.digg}}
                     </div>
                     <div calss="apply">
@@ -39,7 +41,8 @@ import router from "../router" ;
         name:'poststemp',
         data(){
             return{
-                    postslist:[]
+                    postslist:[],
+                    zancount:0
             }
         },
         mounted(){
@@ -55,18 +58,22 @@ import router from "../router" ;
         },
         
         methods:{
-                /*
-            handlezan(ev){
-                
+            
+             digg(index,id){
+                this.zancount++;
                 if(this.zancount>1){
                     MessageBox('鼎城商城提示', '你已经赞过啦！');
                     }else{
-                    this.currentIndex=ev.target.dataset.index;
                     //更新数据,此条数据点赞+1
-                    console.log( this.currentIndex)
+                       this.postslist[index].digg++;
+                       var _this=this;
+                      this.$http.get(`/posts/digg?postid=${id}&newdiggcount=${_this.postslist[index].digg}`).then(res=>{
+                    console.log(res.body)
+               
+    
+            });   
                     }
-            }
-            */
+            },
             changeposdetail(id,viewcon){
                 viewcon++;
                  this.$http.get(`/posts/view?postid=${id}&newviewcount=${viewcon}`).then(res=>{
@@ -115,6 +122,7 @@ import router from "../router" ;
     }
     .top p{
     width:10.2rem;
+    font-size:1rem;
     }
     .bot>div{
         flex:1;

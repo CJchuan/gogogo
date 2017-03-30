@@ -24,7 +24,7 @@
                     <img :src="item.avatar" alt="" v-if="item.avatar!=''" class="l"/>
                     <img src="../assets/images/em.gif" alt="" v-else  class="l"/>
                     <div>
-                    <h5>{{item.uname}}</h5>
+                    <h5>{{item.uname}}</span></h5>
                     <p class="content">{{item.content}}</p>
                     <p class="libot">
                         <span>{{item.otime}}</span> 
@@ -109,18 +109,21 @@ import * as moment from 'moment';
                       var name=res.data.nickname;
                       var avat=res.data.ulogo;
                     _this.data.apply++;
+                    _this.data.sort++;
                     _this.applylist.push({
                         uid:id,
                         uname:name,
                         avatar:avat,
                         content:_this.myapply,
                         ctime:moment().format('X'),
-                        otime:moment().format('YYYY-MM-DD HH:mm:ss')  
+                        otime:moment().format('YYYY-MM-DD HH:mm:ss'),
+                        digg:0,
+                        reply:0  
                     });
                       var newapplylist=JSON.stringify(_this.applylist);
-                      var newapply=encodeURIComponent(newapplylist);
-                      console.log(newapplylist)
-                      _this.$http.get(`/posts/apply?newapplycount=${_this.data.apply}&newlist=${newapplylist}`).then(res=>{
+                      /*var newapply=encodeURIComponent(newapplylist); get url传参时需要转码*/
+                      _this.$http.post("/posts/apply",{newapplycount:_this.data.apply,newlist
+                      :newapplylist,postid:_this.$route.params.poid}).then(res=>{
                         console.log(res.body)
                       })
               
