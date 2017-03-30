@@ -4,51 +4,32 @@
                 <left></left>
                 <h2>购物车<span(5)</span></h2>
         </div>
-      <div class="wrap">
+        <div id="show" v-if="goodscar.length==0">
+          空空。。。。。。
+        </div>
+      <div class="wrap" v-else>
+        
        <table width="100%" align="center" cellpadding="0" border-bottom=".1rem solid #ccc" style="border-collapse:collapse; border-spacing:0px 10px;">
-           <!--  <tr style="border-bottom:.1rem solid #fff">
-                <td width="5%">
-                    <label class="">
-                        <input type="checkbox" class="check" v-model="ischeck"/>
-                        <span class="checkshow" v-if="ischeck">√</span>
-                    </label>
-                </td>
-                <td width="20%">
-                    <img src=""/>
-                </td>
-                <td class="detail">
-                    <p class="goodname">特好看男装aaaaaaaaaaaaaaaa</p>
-                    <p class="desc">描述aaaaaaaaaaaa</p>
-                    <p class="price"><span>￥239</span><span class="beforeprice">￥338</span></p>
-                </td>
-                <td class="count"  width="20%">
-                    <a>-</a>
-                    <input type="text" value="1"/>
-                    <a>+</a>
-                </td>
-                <td class="del"  width="5%">
-                    <a>删除</a>
-                </td>
-            </tr> -->
-            <tr>
+         
+            <tr v-for="(data,index) in goodscar" :key="index">
                 <td width="5%">
                     <label>
-                        <input type="checkbox" class="check" v-model="ischeck"/>
-                        <span class="checkshow" v-if="ischeck">√</span>
+                        <input type="checkbox" :value="index" class="check"  v-model="ischeck"/>
+                       <!--  <span class="checkshow" v-if="ischeck">√</span> -->
                     </label>
                 </td>
                 <td width="20%">
-                    <img src=""/>
+                    <img :src="data.imghash"/>
                 </td>
                 <td class="detail">
-                    <p class="goodname">特好看男装aaaaaaaaaaaaaaaa</p>
-                    <p class="desc">描述aaaaaaaaaaaa</p>
-                    <p class="price"><span>{{price}}</span><span class="beforeprice">￥338</span></p>
+                    
+                    <p class="desc">{{data.goodsName}}</p>
+                    <p class="price"><span>￥{{data.price}} </span><span class="beforeprice">￥{{data.bprice}}</span></p>
                 </td>
                 <td class="count"  width="20%">
-                    <a @click="jian">-</a>
-                    <span> {{value}} </span>
-                    <a @click="add">+</a>
+                    <a @click="jian(index)">-</a>
+                    <span> {{data.num}} </span>
+                    <a @click="add(index)">+</a>
                 </td>
                 <td class="del"  width="5%">
                     <a>删除</a>
@@ -60,8 +41,8 @@
             <tr>
                 <td width="5%">
                     <label class="">
-                        <input type="checkbox" class="check" v-model="ischeck"/>
-                        <span class="checkshow" v-if="ischeck">√</span>
+                        <input type="checkbox"   @click="btn"/>
+                       <!--  <span class="checkshow" v-if="ischeck">√</span> -->
                     </label>
                 </td>
                 <td>全选</td>
@@ -78,27 +59,71 @@
         name:'shopcar',
         data(){
             return{
-                ischeck:true,
+                ischeck:[],
                 value:1,
-                price:200,
-                all:200
+                show:false,
+                all:0,
+                goodscar:[]
             }
         },
         methods:{
-            add(){
-              this.value++;
-              this.all=this.value*this.price
+            btn(){
+      
+                if(this.ischeck.length==this.goodscar.length){
+                  this.ischeck=[]
+                }else{
+                  this.ischeck=[];
+                  for(var i=0;i<this.goodscar.length;i++){
+                    
+                    this.ischeck.push(i)
+                  }
+                }
+                
+              },
+          
+            add(index){
+              this.goodscar[index].num++;
+              console.log(index);
+              this.$http.post('/shopcar/add',{number:this.goodscar[index].num}).then(res=>{
+                 console.log(res.body)
+                 if(res.body=='1'){
+                    console.log(1111)
+                 }
+                })
+              
             },
-            jian(){
-              this.value--;
-              if(this.value<1){
-                this.value=1
+            jian(index){
+              // this.value--;
+               this.goodscar[index].num--;
+              if(this.goodscar[index].num<1){
+                this.goodscar[index].num=1;
+                 
               }
             }
+           
         },
+         beforeRouteEnter(to,from,next){
+        next(vm=>{
+          
+            vm.$http.post('/upsession').then(res=>{
+      
+                    if(res.data=="null"){
+                       router.push({name:"loading"})
+                    }else{
+    
+                    }
+            });
+                    
+        })
+    },
+
         mounted(){
           this.$http.post('/shopcar/read').then(res=>{
               console.log(res.body);
+              this.goodscar=res.body;
+              for(let i=0;i<this.goodscar.length;i++){
+                this.all+=this.goodscar[i].num*this.goodscar[i].price
+              }
           })
         },
         components:{
@@ -108,9 +133,42 @@
 </script>
 
 <style scoped>
-
+.shopcar{
+  display: flex;
+  flex-direction: column;
+}
+#show{
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 30px
+}
+.wrap{
+  flex:1;
+  margin-top: 5rem
+}
+   .header2{
+    width:100%;
+    display: flex;
+    height:4rem;
+    text-align: center;
+    line-height: 4rem;
+    position: fixed;
+    top:0;
+    left:0;
+    background: #fff;
+    z-index: 2
+   }
+   .header2 .iconfont{
+    width:4rem;
+   }
+   .header2 h2{
+    flex:1;
+    font-size: 20px;
+    margin-left: -4rem;
+    color:#a30;
+   }
     input[type=checkbox]{
-        visibility:hidden;
+       
         width:100%;
         height:100%;
     }
@@ -128,9 +186,10 @@
       }
 
     img{
-     width:6rem;
-     height:6rem;
+     width:5rem;
+     height:5rem;
     }
+
     .count a{
         display:inline-block;
         width:1.5rem;
@@ -151,6 +210,8 @@
     }
     tr{
      border-bottom:.2rem solid #fff;
+     padding: .5rem;
+     box-sizing: border-box;
     }
     .del{
      width:3rem;
@@ -164,6 +225,8 @@
     }
     .price{
     color:#f03;
+    height: 2rem;
+    margin-top: 1rem
     }
     .detal p{
       width:20rem;
@@ -172,6 +235,9 @@
     }
     .desc{
     color:#999;
+    height:3rem;
+    overflow:hidden;
+    line-height: 1.5rem
     }
     .checkshow{
       color:#f00;
