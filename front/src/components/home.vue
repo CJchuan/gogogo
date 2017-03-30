@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div id="home">
         
         <header>
@@ -37,7 +37,7 @@
 
         <section id="sec1" v-if="flex.length!=0">
             <div class="left" >        
-                              <!-- 不是v-for 拆开创建的话会有异步的问题 注意加判断 -->
+                             
               <div class="left_1">
                 <p>{{flex[0].adname}}</p>
                 <p>{{flex[0].remark}}</p>
