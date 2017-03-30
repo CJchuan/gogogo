@@ -13,7 +13,19 @@ router.get('/read', function(req, res, next) {
       }
     })
 });
-
+router.get('/detail', function(req, res, next) {
+    //获取某个帖子详情帖子
+    posts.find({
+          _id:req.query.postid
+    },function(error,data){
+      if(!error){
+        console.log(data);
+        res.send(data);
+      }else{
+         res.send('0')
+      }
+    })
+});
 router.post('/write', function(req, res, next) {
     //发布帖子
       posts.create({
@@ -40,33 +52,33 @@ router.post('/write', function(req, res, next) {
 router.get('/digg', function(req, res, next) {
     //赞帖子
     posts.update(
-       {postid: req.query.postid}, {$set: {zan: req.query.newzancount}
+       {_id: req.query.postid}, {$set: {zan: req.query.newzancount}
     },function(error,data){
       if(!error){
         console.log(data);
-        res.send(data);
+        res.send(1);
       }
     })
 });
-router.get('/apply', function(req, res, next) {
-    //zan
+router.post('/apply', function(req, res, next) {
+    //评论
     posts.update(
-       {postid: req.query.postid}, {$set: {apply: req.query.newapplycount}}
-    ,function(error,data){
-      if(!error){
-        console.log(data);
-        res.send(data);
-      }
-    })
-});
-router.get('/view', function(req, res, next) {
-    //zan
-    posts.update(
-       {postid: req.query.postid}, {$set: {apply: req.query.newviewcount}}
+       {_id: req.body.postid}, {$set: {apply: req.body.newapplycount,list:req.body.newlist}}
     ,function(error,data){
       if(!error){
         console.log(data);
         res.send(1);
+      }
+    })
+});
+router.get('/view', function(req, res, next) {
+    //view
+    posts.update(
+       {_id: req.query.postid}, {$set: {view: req.query.newviewcount}}
+    ,function(error,data){
+      if(!error){
+        console.log(data);
+        res.send('1');
       }
     })
 });

@@ -78,7 +78,12 @@ module.exports = {
               target: 'http://10.2.158.246:3000',
               host: '10.2.158.246:3000',
               changeOrigin: true
-          }
+          },
+          "/clearuser":{
+              target: 'http://10.2.158.246:3000',
+              host: '10.2.158.246:3000',
+              changeOrigin: true
+          }          
     }
   },
   performance: {
@@ -99,7 +104,9 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
-        warnings: false
+        warnings: false,
+        drop_debugger: true,
+        drop_console: true       
       }
     }),
     new webpack.LoaderOptionsPlugin({

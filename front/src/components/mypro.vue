@@ -3,14 +3,15 @@
     <div class='cont'>
     	<div class="head" id="log">
     		<div class="face">
-    			<img id="avatar" src="../assets/images/em.gif">
+    			<img id="avatar" src="../assets/images/em.gif" v-if="nossion" />
+    			<img id="avatar" :src="uinfo.ulogo"  v-else />
     		</div>
     		<div class="info">
 	            <h3 id="nickname" v-if="nossion">登录鼎城商城</h3>
-	            <h3 id="nickname" v-else>欢迎回来，{{uname}}</h3>
+	            <h3 id="nickname" v-else>欢迎回来，{{uinfo.nickname}}</h3>
 	            <p id="info">
 	            	<button class="aui-btn aui-btn-danger" style="padding-bottom:3px" @click="changepage" v-if="nossion">点击登录或注册</button>
-	            	<button class="aui-btn aui-btn-danger" style="padding-bottom:3px" @click="changepage" v-else>退出当前登录</button> 	
+	            	<button class="aui-btn aui-btn-danger" style="padding-bottom:3px" @click="exit" v-else>退出当前登录</button> 	
 	            </p>
 	        </div>
 
@@ -79,7 +80,7 @@
 
 
     <script>
-
+    import { MessageBox } from 'mint-ui';
     import router from "../router";
 	export default {
 	  name: 'mypro',
@@ -90,7 +91,7 @@
 	       currentIndex:0,
 	       isShow:true,
 	       nossion:true,
-	       uname:''
+	       uinfo:{}
 	    }
 	  },
 	   beforeRouteEnter(to,from,next){
@@ -103,9 +104,8 @@
                     }else{
                     console.log(res.body)
                       vm.nossion=false;
-                      vm.uname=res.data.nickname;
+                      vm.uinfo=res.data;
                     }
-                    console.log( vm.nossion)
             });
                     
         })
@@ -113,14 +113,21 @@
 	  methods:{
 
 	  	changepage(){
-  		//router.push(`/goods/detail/${id}`); //es6 字符串模板
   			router.push({name:"loading"})
-
   		},
   		changead(){
-  			console.log(11);
   			router.push({name:"myaddress"});
-
+  		},
+  		exit(){
+  		 MessageBox({
+  			title: '提示',
+  			message: '确定退出吗?',
+  			showCancelButton: true
+			});
+			MessageBox.confirm('确定执行此操作?').then(action => {
+  			this.changepage();
+		});
+  		  
   		}
 
 

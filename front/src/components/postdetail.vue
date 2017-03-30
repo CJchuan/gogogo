@@ -7,18 +7,17 @@
             <div class="wrap">
             <div class="top">
                     <img :src="data.avatar" alt="" v-if="data.avatar!=''"/>
-                    <img src="../assets/images/em.gif" alt="" v-else/>
                     <div class="name"> 
                         <h3>{{data.nickname}}</h3>
                         <span>浏览：{{data.view}}</span>
                     </div>
-                    <p class="sendtime">{{data.ctime}}</p>
+                    <p class="sendtime">{{data.otime}}</p>
                 </div>
                 <div class="mid">
                     <p class="word">{{data.content}}</p>
             </div>
             <div class="comment">
-                <h4>评论{{data.comment}}条</h4>
+                <h4>评论{{data.apply}}条</h4>
             </div>
             <ul>
                 <li v-for="(item,index) in applylist" :key="item.id">
@@ -39,13 +38,17 @@
             </ul>
          </div>
         <div class="footer">
-            <div class="show">
-                <a>
+            <div class="continfo" v-if="changebtn">
+                <a @click="clickchange">
                     <i class="iconfont">&#xe6d7;</i>
                     我要评论
                 </a>
                  <i class="iconfont" >&#xe645;</i>{{data.digg}}
                 <i class="iconfont">&#xe64f;</i>{{data.comment}}
+            </div>
+            <div class="applycontent" v-else>
+               <input type="text"  v-model="myapply"/>
+               <mt-button type="danger" size="small" @click="sendapply">发送</mt-button>
             </div>
         </div>
        
@@ -62,25 +65,63 @@ import left from "./left.vue";
         data(){
             return{
                   data:{},
-                  applylist:[] 
+                  applylist:['1111'],
+                  changebtn:true,
+                  myapply:"" 
             }
         },
          beforeRouteEnter(to,from,next){
         next(vm=>{
             Indicator.open();
-            vm.$http.get(`http://10.2.158.246:3000/homeapi/postdetail?pagenum=1&postid=${vm.$route.params.poid}`).then(res=>{
-               console.log(res.body.data)
-                    vm.data=res.body.data;
-                    vm.applylist=res.body.data.list;
+            vm.$http.get(`/posts/detail?postid=${vm.$route.params.poid}`).then(res=>{
+               console.log(res.body)
+                    vm.data=res.body[0];
+                    vm.applylist=res.body.list;
                  Indicator.close();
             });
                     
         })
     }, 
-        mounted(){
-            
-        },
         methods:{
+        clickchange(){
+          this.changebtn=false;
+        },
+        sendapply(){
+         console.log(this)
+            var _this=this;
+            console.log(_this.applylist)
+              _this.$http.post('/upsession').then(res=>{
+                    if(res.data=="null"){
+                       MessageBox({
+                        title: '提示',
+                        message: '您还没有登录！',
+                        showCancelButton: true,
+                        confirmButtonText:"去登录",
+                        cancelButtonText:"暂不评论"
+                    });
+                    MessageBox.confirm('去登录').then(action => {
+                        router.push({name:"loading"})
+                    });
+                    }else{
+                      var id=res.data.uid;
+                      var name=res.data.name;
+                      var avat=res.data.ulogo;
+                    _this.data.apply++;
+                    console.log(_this.applylist)
+                    _this.applylist.push({
+                        uid:id,
+                        uname:name,
+                        avatar:avat,
+                        content:_this.data.apply,
+                        ctime:moment().format('X'),
+                        otime:moment().format('YYYY-MM-DD HH:mm:ss')  
+                    })
+                  
+                     _this.$http.post('/posts/apply',{postid:_this.$route.params.poid,newapplycount:_this.data.apply,newlist:_this.applylist})
+              
+                    }
+            });
+        }
         },
         components:{
           left
@@ -169,5 +210,19 @@ i{
     display:block;
     margin-right:1rem;
 }
-
+.footer>div{
+     display:flex;
+     width:100%;
+     padding:1rem;
+     box-sizing:border-box;
+}
+.applycontent input{
+   flex:4;
+   height:3rem;
+   border:.1rem solid #aaa;
+}
+.applycontent button{
+    flex:1;
+    margin-left:1rem
+}
 </style>

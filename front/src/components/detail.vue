@@ -97,7 +97,7 @@ require('vue-swipe/dist/vue-swipe.css');
               router.push({name:"shopcar"})
              },
              ADDcar(id,vm){
-                vm.$http.post('/shopcar/add',{goodsID:id,price:vm.goods.shop_price,bprice:vm.goods.market_price,number:vm.number,goodsname:vm.goods.title}).then(res=>{
+                vm.$http.post('/shopcar/add',{goodsID:id,price:vm.goods.shop_price,bprice:vm.goods.market_price,number:vm.number,goodsname:vm.goods.title,imghash:vm.goods.images[0]}).then(res=>{
                  console.log(res.body)
                  if(res.body=='1'){
                     Toast({

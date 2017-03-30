@@ -1,10 +1,9 @@
 <template>
     <div class="poststemp wrap">
         <ul>
-            <li v-for="(data,index) of postslist" @click="changeposdetail(data.id)" :key="data.id">
+            <li v-for="(data,index) of postslist" @click="changeposdetail(data._id,data.view)" :key="data.id">
                 <div class="top">
-                    <img :src="data.avatar" alt="" v-if="data.avatar!=''"/>
-                    <img src="../assets/images/em.gif" alt="" v-else/>
+                    <img :src="data.avatar" alt=""/>
                     <h2>{{data.nickname}}</h2>
                     <p class="sendtime">{{data.otime}}</p>
                 </div>
@@ -43,20 +42,8 @@ import router from "../router" ;
                     postslist:[]
             }
         },
-     /*   beforeRouteEnter(to,from,next){
-        next(vm=>{
-            Indicator.open();
-            vm.$http.get("/posts/read").then(res=>{
-            console.log(res.body)
-                    vm.postslist=res.body;
-                       Indicator.close();
-            })
-                    
-        })
-    },      
-    */
         mounted(){
-        Indicator.open();
+            Indicator.open();
             this.$http.get("/posts/read").then(res=>{
             console.log(res.body)
                     this.postslist=res.body;
@@ -80,7 +67,13 @@ import router from "../router" ;
                     }
             }
             */
-            changeposdetail(id){
+            changeposdetail(id,viewcon){
+                viewcon++;
+                 this.$http.get(`/posts/view?postid=${id}&newviewcount=${viewcon}`).then(res=>{
+                    console.log(res.body)
+                    this.postslist=res.body;
+    
+            });
                router.push({name:'postdetail',params:{poid:id}})
             }
         }

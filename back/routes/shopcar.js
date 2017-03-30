@@ -7,12 +7,12 @@ router.post("/add",function(req,res,next){
      console.log(req.session.userinfo)
     shopcar.create({
         uid:req.session.userinfo.uid,
-        num:req.query.number,
-        price:req.query.price,
-        bprice:req.query.bprice,
-        goodsID:req.query.goodsID,
-        goodsName:req.query.goodsname,
-        imghash:req.query.imghash,
+        num:req.body.number,
+        price:req.body.price,
+        bprice:req.body.bprice,
+        goodsID:req.body.goodsID,
+        goodsName:req.body.goodsname,
+        imghash:req.body.imghash,
         ctime:moment().format('X'),
         otime:moment().format('YYYY-MM-DD HH:mm:ss')
     },function(error,data){
@@ -24,11 +24,11 @@ router.post("/add",function(req,res,next){
       }
     })
 });
-router.get("/read",function(req,res,next){
+router.post("/read",function(req,res,next){
     //req.query 获取前端的get请求的数据
     //读取购物车
     shopcar.find({
-        uid:req.query.userid
+        uid:req.session.userinfo.uid
     },function(error,data){
       if(!error){
         console.log(data);
