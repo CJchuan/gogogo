@@ -37,6 +37,7 @@
 </template>
 
 <script>
+  import URL from "../url";
 import left from "./left.vue";
 import router from "../router";
 import { Toast } from 'mint-ui';
@@ -60,7 +61,7 @@ import { Toast } from 'mint-ui';
           beforeRouteEnter(to,from,next){
         next(vm=>{
           
-            vm.$http.post('${vm.URL.url}/upsession').then(res=>{
+            vm.$http.post(`${URL.obj}/upsession`).then(res=>{
       
                     if(res.data=="null"){
                        router.push({name:"loading"})
@@ -75,7 +76,7 @@ import { Toast } from 'mint-ui';
         methods:{
           sendpost(){
           var _this=this;
-            this.$http.post(`${_this.URL.url}/posts/write`,{word:_this.myinput,imgurllist:_this.imglist}).then(res=>{
+            this.$http.post(`${URL.obj}/posts/write`,{word:_this.myinput,imgurllist:_this.imglist}).then(res=>{
                   console.log(res.body);
                   if(res.body=='1'){
                       Toast({ 

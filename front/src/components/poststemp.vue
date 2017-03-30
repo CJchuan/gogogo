@@ -33,6 +33,7 @@
 </template>
 
 <script scoped>
+    import URL from "../url";
 import { Indicator } from 'mint-ui';
 import  write  from './write.vue';
 import { MessageBox } from 'mint-ui';
@@ -48,7 +49,7 @@ import router from "../router" ;
         mounted(){
             Indicator.open();
             var _this=this;
-            this.$http.get(_this.URL.url+"/posts/read").then(res=>{
+            this.$http.get(URL.obj+"/posts/read").then(res=>{
             console.log(res.body)
                     this.postslist=res.body;
                        Indicator.close();
@@ -68,7 +69,7 @@ import router from "../router" ;
                     //更新数据,此条数据点赞+1
                        this.postslist[index].digg++;
                        var _this=this;
-                      this.$http.get(`${_this.URL.url}/posts/digg?postid=${id}&newdiggcount=${_this.postslist[index].digg}`).then(res=>{
+                      this.$http.get(`${URL.obj}/posts/digg?postid=${id}&newdiggcount=${_this.postslist[index].digg}`).then(res=>{
                     console.log(res.body)
                
     
@@ -77,7 +78,7 @@ import router from "../router" ;
             },
             changeposdetail(id,viewcon){
                 viewcon++;
-                 this.$http.get(`${_this.URL.url}/posts/view?postid=${id}&newviewcount=${viewcon}`).then(res=>{
+                 this.$http.get(`${URL.obj}/posts/view?postid=${id}&newviewcount=${viewcon}`).then(res=>{
                     console.log(res.body)
                     this.postslist=res.body;
     

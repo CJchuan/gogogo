@@ -2,35 +2,12 @@
     <div class="shopcar">
         <div class="header2">
                 <left></left>
-                <h2>购物车<span(5)</span></h2>
+                <h2>购物车</h2>
         </div>
       <div class="wrap">
        <table width="100%" align="center" cellpadding="0" border-bottom=".1rem solid #ccc" style="border-collapse:collapse; border-spacing:0px 10px;">
-           <!--  <tr style="border-bottom:.1rem solid #fff">
-                <td width="5%">
-                    <label class="">
-                        <input type="checkbox" class="check" v-model="ischeck"/>
-                        <span class="checkshow" v-if="ischeck">√</span>
-                    </label>
-                </td>
-                <td width="20%">
-                    <img src=""/>
-                </td>
-                <td class="detail">
-                    <p class="goodname">特好看男装aaaaaaaaaaaaaaaa</p>
-                    <p class="desc">描述aaaaaaaaaaaa</p>
-                    <p class="price"><span>￥239</span><span class="beforeprice">￥338</span></p>
-                </td>
-                <td class="count"  width="20%">
-                    <a>-</a>
-                    <input type="text" value="1"/>
-                    <a>+</a>
-                </td>
-                <td class="del"  width="5%">
-                    <a>删除</a>
-                </td>
-            </tr> -->
-            <tr>
+  
+            <tr v-for="(data,index) in cars">
                 <td width="5%">
                     <label>
                         <input type="checkbox" class="check" v-model="ischeck"/>
@@ -38,17 +15,16 @@
                     </label>
                 </td>
                 <td width="20%">
-                    <img src=""/>
+                    <img :src="data.imghash"/>
                 </td>
                 <td class="detail">
-                    <p class="goodname">特好看男装aaaaaaaaaaaaaaaa</p>
-                    <p class="desc">描述aaaaaaaaaaaa</p>
-                    <p class="price"><span>{{price}}</span><span class="beforeprice">￥338</span></p>
+                    <p class="goodname">{{data.goodsName}}</p>
+                    <p class="price"><span>{{data.price}}</span><span class="beforeprice">￥{{data.bprice}}</span></p>
                 </td>
                 <td class="count"  width="20%">
-                    <a @click="jian">-</a>
-                    <span> {{value}} </span>
-                    <a @click="add">+</a>
+                    <a @click="jian(index)">-</a>
+                    <span> {{data.num}} </span>
+                    <a @click="add(index)">+</a>
                 </td>
                 <td class="del"  width="5%">
                     <a>删除</a>
@@ -60,8 +36,8 @@
             <tr>
                 <td width="5%">
                     <label class="">
-                        <input type="checkbox" class="check" v-model="ischeck"/>
-                        <span class="checkshow" v-if="ischeck">√</span>
+                        <input type="checkbox" class="check" v-model="ischeckAll" />
+                        <span class="checkshow" v-if="ischeckAll">√</span>
                     </label>
                 </td>
                 <td>全选</td>
@@ -73,33 +49,67 @@
 </template>
 
 <script>
+  import URL from "../url";
  import left from "./left.vue";
+ import router from "../router"
     export default {
         name:'shopcar',
         data(){
             return{
                 ischeck:true,
-                value:1,
-                price:200,
-                all:200
+                ischeckAll:true,
+                all:0,
+                cars:[],
+                hasuid:0
+
             }
+        },
+        computed:{
+          totalPrice:function(){
+            var total = 0; 
+            this.cars.forEach(function(el){ 
+              if(el.isCheck){
+               total += good.productPrice * good.productQuentity; 
+               }
+              });
+            return total;
+            }
+        }, 
+        watch:{
+          "all":"showTotal"
         },
         methods:{
-            add(){
-              this.value++;
-              this.all=this.value*this.price
+            add(index){
+              this.cars[index].num++;
             },
-            jian(){
-              this.value--;
-              if(this.value<1){
-                this.value=1
-              }
+            jian(index){
+           var num=this.cars[index].num-1;
+            this.cars[index].num=Math.max(num,1);
+            },
+            showTotal(){
+              this.all=this.totalPrice
             }
         },
+          beforeRouteEnter(to,from,next){
+        next(vm=>{
+          
+            vm.$http.post(`${URL.obj}/upsession`).then(res=>{
+      
+                    if(res.data=="null"){
+                       router.push({name:"loading"})
+                    }else{
+                       vm.userinfo.uid=res.data.uid;
+                       vm.userinfo.uname=res.data.nickname;  
+                    }
+            });
+                    
+        })
+    },
         mounted(){
         var _this=this;
-          this.$http.post(_this.URL.url+'/shopcar/read').then(res=>{
+          this.$http.post(`${URL.obj}/shopcar/read`).then(res=>{
               console.log(res.body);
+              this.cars=res.body;
           })
         },
         components:{
@@ -109,7 +119,13 @@
 </script>
 
 <style scoped>
-
+ .header2{
+   height:4rem;
+   line-height:4rem;
+ }
+  h2{
+    display:inline-block;
+  }
     input[type=checkbox]{
         visibility:hidden;
         width:100%;

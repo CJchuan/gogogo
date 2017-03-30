@@ -58,15 +58,9 @@
 
         reg(){
            var _this=this;
-           fetch("http://10.2.158.246:3000/register/goReg",{
-                method:'post',
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `username=${_this.username}&password=${_this.password}`
-                }).then(function (response) {
-                return response.json();//json对象
-                }).then(function(result){
+           _this.$http.post("http://10.2.158.246:3000/register/goReg",{  
+                username:_this.username,password:_this.password
+                }).then(result=>{
                 console.log(result);
                 if(result==1){
                     MessageBox({

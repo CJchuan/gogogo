@@ -56,6 +56,7 @@
 </template>
 
 <script>
+    import URL from "../url";
 import { Indicator } from 'mint-ui';
 import { MessageBox } from 'mint-ui';
 import router from "../router" ;
@@ -74,7 +75,7 @@ import * as moment from 'moment';
          beforeRouteEnter(to,from,next){
         next(vm=>{
             Indicator.open();
-            vm.$http.get(`/posts/detail?postid=${vm.$route.params.poid}`).then(res=>{
+            vm.$http.get(`${URL.obj}/posts/detail?postid=${vm.$route.params.poid}`).then(res=>{
                console.log(res.body)
                     vm.data=res.body[0];
                     vm.applylist=res.body[0].list;
@@ -91,7 +92,7 @@ import * as moment from 'moment';
          console.log(this)
             var _this=this;
             console.log(_this.applylist)
-              _this.$http.post('/upsession').then(res=>{
+              _this.$http.post(`${URL.obj}/upsession`).then(res=>{
                     if(res.data=="null"){
                        MessageBox({
                         title: '提示',
@@ -122,7 +123,7 @@ import * as moment from 'moment';
                     });
                       var newapplylist=JSON.stringify(_this.applylist);
                       /*var newapply=encodeURIComponent(newapplylist); get url传参时需要转码*/
-                      _this.$http.post("/posts/apply",{newapplycount:_this.data.apply,newlist
+                      _this.$http.post(`${URL.obj}/posts/apply`,{newapplycount:_this.data.apply,newlist
                       :newapplylist,postid:_this.$route.params.poid}).then(res=>{
                         console.log(res.body)
                       })

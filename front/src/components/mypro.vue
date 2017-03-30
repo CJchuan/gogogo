@@ -2,8 +2,8 @@
 
     <div class='cont'>
     	<div class="head" id="log">
-    		<div class="face">
-    			<img id="avatar" src="../assets/images/em.gif" v-if="nossion" />
+    		<div class="face" @click="changelogo">
+    			<img id="avatar" :src="require('../assets/images/em.gif')" v-if="nossion" />
     			<img id="avatar" :src="uinfo.ulogo"  v-else />
     		</div>
     		<div class="info">
@@ -74,13 +74,20 @@
 	            <a class="aui-arrow-right"><i class="iconfont">&#xe607;</i>关于鼎城商城</a>
 	        </li>
 	    </ul>
+	    <mt-actionsheet
+  			:actions="actions"
+  			v-model="sheetVisible">
+		</mt-actionsheet>
 	    </div>
 	</template>
 
 
 
     <script>
+
+    	import URL from "../url";
     import { MessageBox } from 'mint-ui';
+    import { Actionsheet } from 'mint-ui';
     import router from "../router";
 	export default {
 	  name: 'mypro',
@@ -91,13 +98,15 @@
 	       currentIndex:0,
 	       isShow:true,
 	       nossion:true,
-	       uinfo:{}
+	       uinfo:{},
+	       sheetVisible:false,
+	       actions:[]
 	    }
 	  },
 	   beforeRouteEnter(to,from,next){
         next(vm=>{
           
-            vm.$http.post(vm.URL.url+'/upsession').then(res=>{
+            vm.$http.post(`${URL.obj}/upsession`).then(res=>{
             console.log(res)
                     if(res.data=="null"){
                        vm.nossion=true
@@ -118,6 +127,65 @@
   		changead(){
   			router.push({name:"myaddress"});
   		},
+  		camera(){
+  			var _this=this;
+  			// 扩展API加载完毕后调用onPlusReady回调函数 
+				document.addEventListener( "plusready", onPlusReady, false );
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+				function onPlusReady() {
+				console.log("plusready");
+			}
+			// 拍照
+			function captureImage(){
+			var cmr = plus.camera.getCamera();
+			var res = cmr.supportedImageResolutions[0];
+			var fmt = cmr.supportedImageFormats[0];
+			console.log("Resolution: "+res+", Format: "+fmt);
+			cmr.captureImage( function( path ){
+			alert( "Capture image success: " + path ); 
+		 	    _this.uinfo.ulogo=path; 
+    			_this.$http.post(URL.obj+"/ulogo",{ulogo:path}).then(res=>{
+    			  console.log(res.body)
+    			
+		},
+		function( error ) {
+			alert( "Capture image failed: " + error.message );
+		},
+		{resolution:res,format:fmt}
+	);
+})
+  		}
+  		},
+  		photos(){
+  		var _this=this;
+  				// 扩展API加载完毕后调用onPlusReady回调函数 
+				document.addEventListener( "plusready", onPlusReady, false );
+				// 扩展API加载完毕，现在可以正常调用扩展API 
+				function onPlusReady() {
+				}
+			// 从相册中选择图片 
+				function galleryImg() {
+				// 从相册中选择图片
+				console.log("从相册中选择图片:");
+    			plus.gallery.pick( function(path){
+    			_this.uinfo.ulogo=path; 
+    			_this.$http.post(URL.obj+"/ulogo",{ulogo:path}).then(res=>{
+    			  console.log(res.body)
+    			})
+    		}, function ( e ) {
+    		console.log( "取消选择图片" );
+    	}, {filter:"image"} );
+	}
+  		},
+  		changelogo(){
+  		var _this=this;
+  		this.sheetVisible=true;
+  		this.actions=[{name:"拍照",method:function(){
+  		     _this.camera();
+  		}},{name:"从相册中选择",method:function(){
+  		   _this.photos();
+  		}}]
+  		},
   		exit(){
   		 MessageBox({
   			title: '提示',
@@ -133,6 +201,7 @@
 
 	  }
 	}
+
 
     </script>
 

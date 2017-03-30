@@ -28,6 +28,7 @@
 
     
 	<script>
+	import URL from "../url";
 	import router from "../router";
     import { Toast } from 'mint-ui';
 	export default {
@@ -52,7 +53,7 @@
 	  mounted(){
 	  	  //清除session
 	  	  var _this=this;
-	  	   this.$http.post(_this.URL.url+'/clearuser').then(res=>{
+	  	   this.$http.post(`${URL.obj}/clearuser`).then(res=>{
             console.log(res)
             });
 	  },
@@ -63,7 +64,7 @@
   		},
   		load(){
   			var _this=this;
-            this.$http.post(_this.URL.url+"/login",{username:_this.username,password:_this.password}).then(res=>{
+            this.$http.post(`${URL.obj}/login`,{username:_this.username,password:_this.password}).then(res=>{
              console.log(res.body)
              if(res.body==0){
                     Toast(_this.errorinfo)

@@ -15,6 +15,8 @@ import 'mint-ui/lib/style.css';
 Vue.use(MintUI);
 import { Button } from 'mint-ui';
 Vue.component(Button.name, Button);
+import { Actionsheet } from 'mint-ui';
+Vue.component(Actionsheet.name, Actionsheet);
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 Vue.use(ElementUI);

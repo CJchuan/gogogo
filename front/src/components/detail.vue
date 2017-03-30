@@ -43,6 +43,7 @@
 </template>
 
 <script>
+  import URL from "../url";
 import router from "../router";
 import { Toast } from 'mint-ui';
 import { Indicator } from 'mint-ui';
@@ -97,7 +98,7 @@ require('vue-swipe/dist/vue-swipe.css');
               router.push({name:"shopcar"})
              },
              ADDcar(id,vm){
-                vm.$http.post('/shopcar/add',{goodsID:id,price:vm.goods.shop_price,bprice:vm.goods.market_price,number:vm.number,goodsname:vm.goods.title,imghash:vm.goods.images[0]}).then(res=>{
+                vm.$http.post(URL.obj+'/shopcar/add',{goodsID:id,price:vm.goods.shop_price,bprice:vm.goods.market_price,number:vm.number,goodsname:vm.goods.title,imghash:vm.goods.images[0]}).then(res=>{
                  console.log(res.body)
                  if(res.body=='1'){
                     Toast({
