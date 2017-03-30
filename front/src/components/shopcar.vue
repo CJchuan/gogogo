@@ -5,7 +5,7 @@
                 <h2>购物车<span(5)</span></h2>
         </div>
         <div id="show" v-if="goodscar.length==0">
-          空空。。。。。。
+          空空。。
         </div>
       <div class="wrap" v-else>
         
