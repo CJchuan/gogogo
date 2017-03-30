@@ -87,7 +87,7 @@
     	methods:{
     		handleClick(index,id){
     			this.currentIndex=index;
-    			console.log(index);
+    			//console.log(index);
     			if(index==0){
                      this.currentIndex=0;
     		  }
@@ -195,7 +195,7 @@
 	    
      }
      #list .goods-ul{
-     	margin-top: 9rem;
+     	margin-top: 8rem;
      	width:100%; 
      	height:100%;
      	overflow: hidden; 
@@ -213,12 +213,12 @@
       	  width:8.8rem;
      	    height:8.8rem;
           float: left;
-          margin-right: 8px;
+          margin-right: 0.8rem;
       }
       #list .goods-ul li h2{
       	color: #555;
 		    font-size: 1.4rem;
-		    height: 3.2rem;
+		    height: 3.5rem;
 		    overflow: hidden;
 		    margin-bottom:0.2rem;
       }
