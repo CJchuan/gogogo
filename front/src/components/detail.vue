@@ -87,7 +87,8 @@ require('vue-swipe/dist/vue-swipe.css');
                        router.push({name:"loading"})
                     }else{
                        this.uid=res.data.uid;  
-                       this.ADDcar(id,_this)
+                       this.ADDcar(id,_this);
+
                     }
             });
                

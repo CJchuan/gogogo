@@ -6,7 +6,7 @@
         </div>
       <div class="wrap">
        <table width="100%" align="center" cellpadding="0" border-bottom=".1rem solid #ccc" style="border-collapse:collapse; border-spacing:0px 10px;">
-            <tr style="border-bottom:.1rem solid #fff">
+           <!--  <tr style="border-bottom:.1rem solid #fff">
                 <td width="5%">
                     <label class="">
                         <input type="checkbox" class="check" v-model="ischeck"/>
@@ -29,7 +29,7 @@
                 <td class="del"  width="5%">
                     <a>删除</a>
                 </td>
-            </tr>
+            </tr> -->
             <tr>
                 <td width="5%">
                     <label>
@@ -43,12 +43,12 @@
                 <td class="detail">
                     <p class="goodname">特好看男装aaaaaaaaaaaaaaaa</p>
                     <p class="desc">描述aaaaaaaaaaaa</p>
-                    <p class="price"><span>￥239</span><span class="beforeprice">￥338</span></p>
+                    <p class="price"><span>{{price}}</span><span class="beforeprice">￥338</span></p>
                 </td>
                 <td class="count"  width="20%">
-                    <a>-</a>
-                    <input type="text" value="1"/>
-                    <a>+</a>
+                    <a @click="jian">-</a>
+                    <span> {{value}} </span>
+                    <a @click="add">+</a>
                 </td>
                 <td class="del"  width="5%">
                     <a>删除</a>
@@ -65,7 +65,7 @@
                     </label>
                 </td>
                 <td>全选</td>
-                <td>合计：<span class="f30">￥0</span></td>
+                <td>合计：<span class="f30">{{all}}</span></td>
                 <td style="text-align:center;background-color:#f30;color:#fff">结算（0）</td>
             </tr>
        </table>
@@ -78,11 +78,28 @@
         name:'shopcar',
         data(){
             return{
-                ischeck:true
+                ischeck:true,
+                value:1,
+                price:200,
+                all:200
             }
         },
         methods:{
-
+            add(){
+              this.value++;
+              this.all=this.value*this.price
+            },
+            jian(){
+              this.value--;
+              if(this.value<1){
+                this.value=1
+              }
+            }
+        },
+        mounted(){
+          this.$http.post('/shopcar/read').then(res=>{
+              console.log(res.body)
+          })
         },
         components:{
         left
@@ -175,10 +192,12 @@
      top:-1.2rem;
     }
     .f30{
-     color:#f30
+     color:#f30;
+     
     }
     .beforeprice{
      text-decoration:line-through;
      color:#888;
     }
+
 </style>

@@ -19,7 +19,7 @@
                     <i class="iconfont one">&#xe60b;</i>
                     <span>抢低价</span>
                 </li>
-                 <li>
+                 <li @click="qiangshequ">
                     <i class="iconfont two">&#xe68d;</i>
                     <span>抢社区</span>
                 </li>
@@ -173,6 +173,9 @@ export default {
     },
      changegoodlist(){
       router.push({name:"goodlist"})
+    },
+    qiangshequ(){
+      router.push({name:"postslist"})
     }    
   }
 }

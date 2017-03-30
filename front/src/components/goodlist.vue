@@ -1,7 +1,7 @@
 ﻿ <template>
   <div id="goodlist" class="list">
     <div class="top">
-         <header>11
+         <header>
              <span class="iconfont" @click="fanhui">&#xe647;</span>
              <h4>商品列表</h4>
              <span class="iconfont">&#xe67a;</span>
@@ -64,7 +64,7 @@
             },
             xiaoliang(){
                 this.$http.get("http://10.2.158.246:3000/homeapi/list/hot").then(res=>{
-                console.log(res.body);
+                // console.log(res.body);
                 this.goodlist=res.body.data.list
                 },error=>{
 
@@ -72,7 +72,7 @@
             },
             songhe(){
                 this.$http.get("http://10.2.158.246:3000/homeapi/list/def").then(res=>{
-                console.log(res.body);
+                // console.log(res.body);
                 this.goodlist=res.body.data.list
                 },error=>{
 
@@ -81,7 +81,7 @@
             jiage(){
               this.isshow=true;
                 this.$http.get("http://10.2.158.246:3000/homeapi/list/price").then(res=>{
-                console.log(res.body);
+                // console.log(res.body);
                 this.goodlist=res.body.data.list
                 },error=>{
 
@@ -89,7 +89,7 @@
             },
             fenlei(){
                 this.$http.get("http://10.2.158.246:3000/homeapi/category1").then(res=>{
-                console.log(res.body);
+                // console.log(res.body);
                 this.classlist=res.body.data;
                 // loadMore()
                 this.goodlist=[];
@@ -116,7 +116,7 @@
        },
        mounted(){
         this.$http.get("http://10.2.158.246:3000/homeapi/lists?pageid="+1).then(res=>{
-                console.log(res.body.data.list);
+                // console.log(res.body.data.list);
                 this.goodlist=res.body.data.list;
 
         },error=>{
@@ -152,13 +152,14 @@
 }
    header{
     height:4.8rem;
-    background: #f00;
+    background: #fff;
     display: flex;
     text-align: center;
    /* position: absolute;
     top:0;
     left:0;*/
-
+    color:#bc946e;
+    border-bottom: 1px solid #ccc
    }
    header span{
     
@@ -222,6 +223,8 @@
       margin-top: 10rem;
       padding:5%;
       width:100%;
+      overflow:auto;
+      background: #fff
      }
    ul#goodname2 li{
     width:25%;
