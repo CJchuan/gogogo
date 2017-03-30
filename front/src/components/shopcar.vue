@@ -97,7 +97,8 @@
             }
         },
         mounted(){
-          this.$http.post('/shopcar/read').then(res=>{
+        var _this=this;
+          this.$http.post(_this.URL.url+'/shopcar/read').then(res=>{
               console.log(res.body);
           })
         },

@@ -51,7 +51,8 @@
 	  },
 	  mounted(){
 	  	  //清除session
-	  	   this.$http.post('/clearuser').then(res=>{
+	  	  var _this=this;
+	  	   this.$http.post(_this.URL.url+'/clearuser').then(res=>{
             console.log(res)
             });
 	  },
@@ -62,7 +63,7 @@
   		},
   		load(){
   			var _this=this;
-            this.$http.post("/login",{username:_this.username,password:_this.password}).then(res=>{
+            this.$http.post(_this.URL.url+"/login",{username:_this.username,password:_this.password}).then(res=>{
              console.log(res.body)
              if(res.body==0){
                     Toast(_this.errorinfo)

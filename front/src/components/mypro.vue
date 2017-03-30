@@ -97,7 +97,7 @@
 	   beforeRouteEnter(to,from,next){
         next(vm=>{
           
-            vm.$http.post('/upsession').then(res=>{
+            vm.$http.post(vm.URL.url+'/upsession').then(res=>{
             console.log(res)
                     if(res.data=="null"){
                        vm.nossion=true

@@ -47,7 +47,8 @@ import router from "../router" ;
         },
         mounted(){
             Indicator.open();
-            this.$http.get("/posts/read").then(res=>{
+            var _this=this;
+            this.$http.get(_this.URL.url+"/posts/read").then(res=>{
             console.log(res.body)
                     this.postslist=res.body;
                        Indicator.close();
@@ -67,7 +68,7 @@ import router from "../router" ;
                     //更新数据,此条数据点赞+1
                        this.postslist[index].digg++;
                        var _this=this;
-                      this.$http.get(`/posts/digg?postid=${id}&newdiggcount=${_this.postslist[index].digg}`).then(res=>{
+                      this.$http.get(`${_this.URL.url}/posts/digg?postid=${id}&newdiggcount=${_this.postslist[index].digg}`).then(res=>{
                     console.log(res.body)
                
     
@@ -76,7 +77,7 @@ import router from "../router" ;
             },
             changeposdetail(id,viewcon){
                 viewcon++;
-                 this.$http.get(`/posts/view?postid=${id}&newviewcount=${viewcon}`).then(res=>{
+                 this.$http.get(`${_this.URL.url}/posts/view?postid=${id}&newviewcount=${viewcon}`).then(res=>{
                     console.log(res.body)
                     this.postslist=res.body;
     

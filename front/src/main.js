@@ -8,6 +8,7 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
 require('vue-swipe/dist/vue-swipe.css');
+import URL from "./url";
 rem.count();
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
@@ -28,5 +29,6 @@ new Vue({
   el: '#app',
   router,
   rem,
+  URL,
   render: h => h(App)
 })
