@@ -91,7 +91,6 @@
                 this.$http.get("http://10.2.158.246:3000/homeapi/category1").then(res=>{
                 // console.log(res.body);
                 this.classlist=res.body.data;
-                // loadMore()
                 this.goodlist=[];
                 this.isshow=false
                 },error=>{
