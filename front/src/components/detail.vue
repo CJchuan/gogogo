@@ -17,10 +17,10 @@
 			  	      	<span class="shop-price">{{goods.shop_price}}元</span>
 			            <span class="market-price">原价:{{goods.market_price}}元</span> 	      
 			   	      </p>
-			   	      <div class="number">
+			   	      <div class="buynumber">
 			   	      	<div class="left" @click="low">-</div>
 			  	        <input type="text"  v-model="number"/>
-			  	        <div class="right" @lick="up">+</div>
+			  	        <div class="right" @click="up">+</div>
 			   	      </div>			  	       	  
 			   	      
 			  	  </div>
@@ -79,6 +79,7 @@ require('vue-swipe/dist/vue-swipe.css');
                    this.number++;
              },
              low(){
+             	//console.log(1111);
               this.number=Math.max(1,this.number-1)
              },
              addcar(id){
@@ -182,13 +183,13 @@ require('vue-swipe/dist/vue-swipe.css');
       #detail .sell p .market-price{
       	  text-decoration: line-through;
       }
-      #detail .sell .number{    	 
+      #detail .sell .buynumber{    	 
 	      	  width:9rem;
 	      	  height:3rem;
 	      	  position:absolute;
 	      	  right:0.1rem;     	  
       }
-      #detail .sell .number .left{
+      #detail .sell .buynumber .left{
 	      	  width:2rem;
 	      	  height:2rem;
 	      	  line-height: 2rem;
@@ -196,7 +197,7 @@ require('vue-swipe/dist/vue-swipe.css');
 	      	  float:left;
 	      	  text-align: center;
       }
-      #detail .sell .number .right{
+      #detail .sell .buynumber .right{
 	      	  width:2rem;
 	      	  height:2rem;
 	      	  line-height: 2rem;
@@ -204,7 +205,7 @@ require('vue-swipe/dist/vue-swipe.css');
 	      	  float:left;
 	      	  text-align: center;
       }
-      #detail .sell .number input{
+      #detail .sell .buynumber input{
 	      	 width:2.5rem;
 	      	 height: 2rem;
 	      	 float:left;
